@@ -1,3 +1,87 @@
-Satay Warisan Yati TJ
-Cashier POS System
-Website successfully created.
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satay Warisan Yati TJ POS</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+padding:20px;
+background:#f5f5f5;
+}
+h1{
+text-align:center;
+}
+.menu-item{
+background:white;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+}
+input{
+width:60px;
+}
+button{
+padding:10px;
+margin-top:10px;
+width:100%;
+background:#28a745;
+color:white;
+border:none;
+border-radius:5px;
+}
+#total{
+font-size:24px;
+font-weight:bold;
+margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<h1>🍢 Satay Warisan Yati TJ</h1>
+
+<div class="menu-item">
+<span>Sate Ayam (RM1.20)</span>
+<input type="number" min="0" value="0" id="ayam">
+</div>
+
+<div class="menu-item">
+<span>Sate Daging (RM1.50)</span>
+<input type="number" min="0" value="0" id="daging">
+</div>
+
+<div class="menu-item">
+<span>Sate Kambing (RM2.00)</span>
+<input type="number" min="0" value="0" id="kambing">
+</div>
+
+<div class="menu-item">
+<span>Nasi Impit (RM1.00)</span>
+<input type="number" min="0" value="0" id="nasi">
+</div>
+
+<button onclick="calculate()">Calculate Total</button>
+
+<div id="total">
+Total: RM0.00
+</div>
+
+<script>
+function calculate(){
+let total=
+(document.getElementById('ayam').value*1.2)+
+(document.getElementById('daging').value*1.5)+
+(document.getElementById('kambing').value*2)+
+(document.getElementById('nasi').value*1);
+
+document.getElementById('total').innerHTML=
+"Total: RM"+total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
