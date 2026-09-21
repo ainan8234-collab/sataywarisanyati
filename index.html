@@ -4,83 +4,224 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Satay Warisan Yati TJ POS</title>
+
 <style>
 body{
-font-family:Arial,sans-serif;
-padding:20px;
-background:#f5f5f5;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    padding:15px;
+    max-width:900px;
+    margin:auto;
 }
-h1{
-text-align:center;
+h1,h2{
+    text-align:center;
 }
-.menu-item{
-background:white;
-padding:10px;
-margin:10px 0;
-border-radius:8px;
-display:flex;
-justify-content:space-between;
+.section{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+}
+.item{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
 }
 input{
-width:60px;
+    width:60px;
 }
 button{
-padding:10px;
-margin-top:10px;
-width:100%;
-background:#28a745;
-color:white;
-border:none;
-border-radius:5px;
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
 }
-#total{
-font-size:24px;
-font-weight:bold;
-margin-top:20px;
+.save{
+    background:green;
+}
+.new{
+    background:orange;
+}
+.total{
+    font-size:28px;
+    font-weight:bold;
+    text-align:center;
+    margin:20px 0;
+}
+.history{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-top:20px;
 }
 </style>
 </head>
+
 <body>
 
 <h1>🍢 Satay Warisan Yati TJ</h1>
 
-<div class="menu-item">
-<span>Sate Ayam (RM1.20)</span>
-<input type="number" min="0" value="0" id="ayam">
+<div class="section">
+<h2>Menu Utama</h2>
+
+<div class="item"><span>Sate Ayam RM1.20</span><input id="ayam" type="number" value="0"></div>
+<div class="item"><span>Sate Daging RM1.50</span><input id="daging" type="number" value="0"></div>
+<div class="item"><span>Sate Kambing RM2.00</span><input id="kambing" type="number" value="0"></div>
+<div class="item"><span>Sate Perut RM1.70</span><input id="perut" type="number" value="0"></div>
+<div class="item"><span>Sate Kulit RM1.70</span><input id="kulit" type="number" value="0"></div>
+<div class="item"><span>Sate Tulang RM1.80</span><input id="tulang" type="number" value="0"></div>
+<div class="item"><span>Nasi Impit RM1.00</span><input id="impit" type="number" value="0"></div>
 </div>
 
-<div class="menu-item">
-<span>Sate Daging (RM1.50)</span>
-<input type="number" min="0" value="0" id="daging">
+<div class="section">
+<h2>Menu Sampingan</h2>
+
+<div class="item"><span>Nasi Lemak RM4.00</span><input id="lemak" type="number" value="0"></div>
+<div class="item"><span>Telur Mata RM1.00</span><input id="mata" type="number" value="0"></div>
+<div class="item"><span>Ayam Merah RM4.50</span><input id="merah" type="number" value="0"></div>
+<div class="item"><span>Ayam Rendang RM4.50</span><input id="rendang" type="number" value="0"></div>
+<div class="item"><span>Telur Rebus RM1.50</span><input id="rebus" type="number" value="0"></div>
+<div class="item"><span>Telur Rendang RM2.00</span><input id="telurrenderang" type="number" value="0"></div>
 </div>
 
-<div class="menu-item">
-<span>Sate Kambing (RM2.00)</span>
-<input type="number" min="0" value="0" id="kambing">
+<div class="section">
+<h2>Air</h2>
+
+<select id="drink">
+<option value="">Pilih Minuman</option>
+<option value="3">Nescafe Panas RM3.00</option>
+<option value="4.5">Nescafe Sejuk RM4.50</option>
+
+<option value="3">Milo Panas RM3.00</option>
+<option value="4.5">Milo Sejuk RM4.50</option>
+
+<option value="4.5">Neslo Panas RM4.50</option>
+<option value="5.5">Neslo Sejuk RM5.50</option>
+
+<option value="3">Teh Panas RM3.00</option>
+<option value="4">Teh Sejuk RM4.00</option>
+
+<option value="2">Teh O Panas RM2.00</option>
+<option value="2.5">Teh O Sejuk RM2.50</option>
+
+<option value="3.5">Sirap Sejuk RM3.50</option>
+<option value="3.5">Tebu Sejuk RM3.50</option>
+<option value="3.5">Jagung Sejuk RM3.50</option>
+
+<option value="4.5">Extrajoss Anggur RM4.50</option>
+<option value="4.5">Extrajoss Mangga RM4.50</option>
+<option value="4.5">Extrajoss Oren RM4.50</option>
+
+<option value="0.8">Air Kosong RM0.80</option>
+<option value="0.5">Air Suam RM0.50</option>
+</select>
+
+<input id="drinkQty" type="number" value="0" style="margin-top:10px;width:100%;">
 </div>
 
-<div class="menu-item">
-<span>Nasi Impit (RM1.00)</span>
-<input type="number" min="0" value="0" id="nasi">
+<div class="total" id="total">
+TOTAL RM0.00
 </div>
 
-<button onclick="calculate()">Calculate Total</button>
+<button class="save" onclick="saveOrder()">💾 Save Order</button>
+<button class="new" onclick="newOrder()">🆕 New Order</button>
 
-<div id="total">
-Total: RM0.00
+<div class="history">
+<h2>Today's Sales</h2>
+<h3 id="sales">RM0.00</h3>
+
+<h2>Order History</h2>
+<div id="orders"></div>
 </div>
 
 <script>
-function calculate(){
-let total=
-(document.getElementById('ayam').value*1.2)+
-(document.getElementById('daging').value*1.5)+
-(document.getElementById('kambing').value*2)+
-(document.getElementById('nasi').value*1);
 
-document.getElementById('total').innerHTML=
-"Total: RM"+total.toFixed(2);
+function calculateTotal(){
+
+let total=0;
+
+total += Number(document.getElementById('ayam').value)*1.2;
+total += Number(document.getElementById('daging').value)*1.5;
+total += Number(document.getElementById('kambing').value)*2;
+total += Number(document.getElementById('perut').value)*1.7;
+total += Number(document.getElementById('kulit').value)*1.7;
+total += Number(document.getElementById('tulang').value)*1.8;
+total += Number(document.getElementById('impit').value)*1;
+
+total += Number(document.getElementById('lemak').value)*4;
+total += Number(document.getElementById('mata').value)*1;
+total += Number(document.getElementById('merah').value)*4.5;
+total += Number(document.getElementById('rendang').value)*4.5;
+total += Number(document.getElementById('rebus').value)*1.5;
+total += Number(document.getElementById('telurrenderang').value)*2;
+
+total += Number(document.getElementById('drink').value || 0) *
+Number(document.getElementById('drinkQty').value);
+
+document.getElementById('total').innerHTML =
+"TOTAL RM" + total.toFixed(2);
+
+return total;
 }
+
+document.addEventListener('input',calculateTotal);
+
+function saveOrder(){
+
+let total = calculateTotal();
+
+let orders =
+JSON.parse(localStorage.getItem('orders') || '[]');
+
+orders.push({
+orderNo: orders.length+1,
+date:new Date().toLocaleString(),
+total:total
+});
+
+localStorage.setItem(
+'orders',
+JSON.stringify(orders)
+);
+
+loadOrders();
+
+alert('Order Saved');
+}
+
+function loadOrders(){
+
+let orders =
+JSON.parse(localStorage.getItem('orders') || '[]');
+
+let html='';
+let sales=0;
+
+orders.forEach(o=>{
+html += `<p>#${o.orderNo} - RM${o.total.toFixed(2)}<br>${o.date}</p>`;
+sales += o.total;
+});
+
+document.getElementById('orders').innerHTML=html;
+document.getElementById('sales').innerHTML=
+'RM'+sales.toFixed(2);
+}
+
+function newOrder(){
+
+document.querySelectorAll('input[type=number]')
+.forEach(x=>x.value=0);
+
+document.getElementById('drink').selectedIndex=0;
+
+calculateTotal();
+}
+
+loadOrders();
+
 </script>
 
 </body>
