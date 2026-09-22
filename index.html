@@ -329,30 +329,56 @@ renderCart();
 }
 function showNasiLemakPopup(){
 
+let pilihan = prompt(
+`Add On Nasi Lemak
+
+1 = Telur Mata (+RM1.00)
+2 = Ayam Merah (+RM4.50)
+3 = Ayam Rendang (+RM4.50)
+4 = Telur Rebus (+RM1.50)
+5 = Telur Rendang (+RM2.00)
+
+Contoh:
+1,3`
+);
+
 let total = 4;
 let nama = "Nasi Lemak";
 
-if(confirm("Tambah Telur Mata?")){
+if(!pilihan){
+
+cart.push({
+    name:nama,
+    qty:1,
+    price:total
+});
+
+renderCart();
+return;
+
+}
+
+if(pilihan.includes("1")){
     total += 1;
     nama += " + Telur Mata";
 }
 
-if(confirm("Tambah Ayam Merah?")){
+if(pilihan.includes("2")){
     total += 4.5;
     nama += " + Ayam Merah";
 }
 
-if(confirm("Tambah Ayam Rendang?")){
+if(pilihan.includes("3")){
     total += 4.5;
     nama += " + Ayam Rendang";
 }
 
-if(confirm("Tambah Telur Rebus?")){
+if(pilihan.includes("4")){
     total += 1.5;
     nama += " + Telur Rebus";
 }
 
-if(confirm("Tambah Telur Rendang?")){
+if(pilihan.includes("5")){
     total += 2;
     nama += " + Telur Rendang";
 }
@@ -366,6 +392,7 @@ cart.push({
 renderCart();
 
 }
+
 function qtyPopup(item,price){
 
 let qty = prompt(
