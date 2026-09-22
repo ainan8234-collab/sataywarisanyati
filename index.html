@@ -164,6 +164,7 @@ document.getElementById("menuTitle").innerHTML =
 
 document.getElementById("productGrid").innerHTML = `
 
+
 <div class="product-card" onclick="qtyPopup('Sate Ayam',1.20)">
 <h3>Sate Ayam</h3>
 <div class="price">RM1.20</div>
@@ -224,67 +225,67 @@ document.getElementById("menuTitle").innerHTML =
 
 document.getElementById("productGrid").innerHTML = `
 
-<div class="product-card" onclick="airPopup('Teh O',2.00,2.50)">
+<div class="product-card" onclick="showAirOption('Teh O',2.00,2.50)">
 <h3>Teh O</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Teh',3.00,4.00)">
+<div class="product-card" onclick="showAirOption('Teh',3.00,4.00)">
 <h3>Teh</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Milo',3.00,4.50)">
+<div class="product-card" onclick="showAirOption('Milo',3.00,4.50)">
 <h3>Milo</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Nescafe',3.00,4.50)">
+<div class="product-card" onclick="showAirOption('Nescafe',3.00,4.50)">
 <h3>Nescafe</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Neslo',4.50,5.50)">
+<div class="product-card" onclick="showAirOption('Neslo',4.50,5.50)">
 <h3>Neslo</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Sirap',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Sirap',3.50,3.50)">
 <h3>Sirap</h3>
 <div class="price">RM3.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Tebu',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Tebu',3.50,3.50)">
 <h3>Tebu</h3>
 <div class="price">RM3.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Jagung',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Jagung',3.50,3.50)">
 <h3>Jagung</h3>
 <div class="price">RM3.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Extrajoss Anggur',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Anggur',4.50,4.50)">
 <h3>Extrajoss Anggur</h3>
 <div class="price">RM4.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Extrajoss Mangga',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Mangga',4.50,4.50)">
 <h3>Extrajoss Mangga</h3>
 <div class="price">RM4.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Extrajoss Oren',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Oren',4.50,4.50)">
 <h3>Extrajoss Oren</h3>
 <div class="price">RM4.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Air Suam',0.50,0.50)">
+<div class="product-card" onclick="showAirOption('Air Suam',0.50,0.50)">
 <h3>Air Suam</h3>
 <div class="price">RM0.50</div>
 </div>
 
-<div class="product-card" onclick="airPopup('Air Kosong',0.80,0.80)">
+<div class="product-card" onclick="showAirOption('Air Kosong',0.80,0.80)">
 <h3>Air Kosong</h3>
 <div class="price">RM0.80</div>
 </div>
@@ -292,41 +293,33 @@ document.getElementById("productGrid").innerHTML = `
 `;
 
 }
-    function airPopup(item,hotPrice,coldPrice){
+function showAirOption(item,hotPrice,coldPrice){
 
-let panas = confirm(
-item + "\n\nOK = Panas\nCancel = Sejuk"
-);
+document.getElementById("menuTitle").innerHTML =
+item + " Pilihan";
 
-let jenis;
-let harga;
+document.getElementById("productGrid").innerHTML = `
 
-if(panas){
-    jenis = " Panas";
-    harga = hotPrice;
-}else{
-    jenis = " Sejuk";
-    harga = coldPrice;
-}
+<div class="product-card" onclick="showAir()">
+<h3>⬅️ Kembali</h3>
+</div>
 
-let qty = prompt(
-"Masukkan Kuantiti",
-"1"
-);
+<div class="product-card"
+onclick="qtyPopup('${item} Panas',${hotPrice})">
+<h3>☕ Panas</h3>
+<div class="price">RM${hotPrice.toFixed(2)}</div>
+</div>
 
-if(qty===null || qty==="" || qty<=0){
-    return;
-}
+<div class="product-card"
+onclick="qtyPopup('${item} Sejuk',${coldPrice})">
+<h3>🧊 Sejuk</h3>
+<div class="price">RM${coldPrice.toFixed(2)}</div>
+</div>
 
-cart.push({
-    name:item + jenis,
-    qty:Number(qty),
-    price:harga
-});
-
-renderCart();
+`;
 
 }
+   
 function showNasiLemakPopup(){
 
 let pilihan = prompt(
@@ -397,7 +390,7 @@ function qtyPopup(item,price){
 
 let qty = prompt(
 "Masukkan kuantiti untuk " + item,
-"10"
+"1"
 );
 
 if(qty===null || qty==="" || qty<=0){
@@ -509,13 +502,25 @@ border-radius:8px;
 <b>Order #${order.orderNo}</b><br><br>
 `;
 
+let orderTotal = 0;
+
 order.items.forEach(item => {
 
+let amount = item.qty * item.price;
+
+orderTotal += amount;
+
 html += `
-${item.name} x${item.qty}<br>
+${item.name} x${item.qty}
+(RM${amount.toFixed(2)})<br>
 `;
 
 });
+
+html += `
+<br>
+<b>Total: RM${orderTotal.toFixed(2)}</b>
+`;
 
 html += `
 </div>
