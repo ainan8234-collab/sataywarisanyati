@@ -1,343 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0
-<title>Satay Warisan Yati TJ POS</title>
+${order.status}<br>
  
-<style>
-body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-margin:0;
-padding:20px;
-}
+Payment:
+${order.payment}<br>
  
-.container{
-max-width:1000px;
-margin:auto
-}
-
-.section{
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
+RM${order.total.toFixed(2)}<br>
  
-h1,h2{
-text-align:center;
-}
+${order.date}
  
-.item{
-display:flex;
-justify-content:space-between;
-margin:8px 0;
-}
-
-input[type="number"]{
-width:70px;
-}
-
-.total{
-text-align:center;
-font-size:30px;
-font-weight:bold;
-color:green;
-margin:20px 0;
-}
- 
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:8px;
-font-size:16px;
-cursor:pointer;
-}
-
-.save{
-background:green;
-color:white;
-}
-
-.new{
-background:orange;
-color:white;
-}
-
-.order-card{
-border:1px solid #ddd;
-padding:10px;
-border-radius:8px;
-margin-bottom:10px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>🍢 Satay Warisan Yati TJ POS</h1>
-
-<div class="section">
-<h2>Order Information</h2>
-
-<label>
-<input type="radio" name="orderType" value="Dine In" checked>
-🍽️ Dine In
-</label>
-
-<label style="margin-left:20px;">
-<input type="radio" name="orderType" value="Takeaway">
-🥡 Takeaway
-</label>
-
-<br><br>
-
-<div class="item">
-<span>Table No</span>
-<input type="text" id="tableNo">
-</div>
-
-<div class="item">
-<span>Status</span>
-<select id="orderStatus">
-<option value="Pending">🟡 Pending</option>
-<option value="Paid">✅ Paid</option>
-</select>
-</div>
-
-<div class="item">
-<span>Customer Note</span>
-<input type="text" id="note">
-</div>
-
-</div>
-
-<div class="section">
-<h2>Menu Utama</h2>
-
-<div class="item">Sate Ayam RM1.20 <input type="number" id="ayam" value="0"></div>
-<div class="item">Sate Daging RM1.50 <input type="number" id="daging" value="0"></div>
-<div class="item">Sate Kambing RM2.00 <input type="number" id="kambing" value="0"></div>
-<div class="item">Sate Perut RM1.70 <input type="number" id="perut" value="0"></div>
-<div class="item">Sate Kulit RM1.70 <input type="number" id="kulit" value="0"></div>
-<div class="item">Sate Tulang RM1.80 <input type="number" id="tulang" value="0"></div>
-<div class="item">Nasi Impit RM1.00 <input type="number" id="impit" value="0"></div>
-
-</div>
-
-<div class="section">
-<h2>Menu Sampingan</h2>
- 
-<div class="item">Nasi Lemak RM4.00 <input type="number" id="lemak" value="0"></div>
-<div class="item">Telur Mata RM1.00 <input type="number" id="mata" value="0"></div>
-<div class="item">Ayam Merah RM4.50 <input type="number" id="merah" value="0"></div>
-<div class="item">Ayam Rendang RM4.50 <input type="number" id="rendang" value="0"></div>
-<div class="item">Telur Rebus RM1.50 <input type="number" id="rebus" value="0"></div>
-<div class="item">Telur Rendang RM2.00 <input type="number" id="telurrenderang" value="0"></div>
-
 </div>
  
-<div class="section">
-<h2>Air</h2>
-
-<div class="item">Nescafe Panas RM3.00 <input type="number" id="nescafep" value="0"></div>
-<div class="item">Nescafe Sejuk RM4.50 <input type="number" id="nescafes" value="0"></div>
-
-<div class="item">Milo Panas RM3.00 <input type="number" id="milop" value="0"></div>
-<div class="item">Milo Sejuk RM4.50 <input type="number" id="milos" value="0"></div>
- 
-<div class="item">Neslo Panas RM4.50 <input type="number" id="neslop" value="0"></div>
-<div class="item">Neslo Sejuk RM5.50 <input type="number" id="neslos" value="0"></div>
- 
-<div class="item">Teh Panas RM3.00 <input type="number" id="tehp" value="0"></div>
-<div class="item">Teh Sejuk RM4.00 <input type="number" id="tehs" value="0"></div>
- 
-<div class="item">Teh O Panas RM2.00 <input type="number" id="tehop" value="0"></div>
-<div class="item">Teh O Sejuk RM2.50 <input type="number" id="tehos" value="0"></div>
-<div class="item">Sirap Ais RM3.50 <input type="number" id="sirap" value="0"></div>
-<div class="item">Tebu Ais RM3.50 <input type="number" id="tebu" value="0"></div>
-<div class="item">Jagung Ais RM3.50 <input type="number" id="jagung" value="0"></div>
- 
-<div class="item">Extrajoss Anggur RM4.50 <input type="number" id="anggur" value="0"></div>
-<div class="item">Extrajoss Mangga RM4.50 <input type="number" id="mangga" value="0"></div>
-<div class="item">Extrajoss Oren RM4.50 <input type="number" id="oren" value="0"></div>
-
-<div class="item">Air Kosong RM0.80 <input type="number" id="kosong" value="0"></div>
-<div class="item">Air Suam RM0.50 <input type="number" id="suam" value="0"></div>
-
-</div>
-
-<div class="total" id="total">
-TOTAL RM0.00
-</div>
-
-<button class="save" onclick="saveOrder()">💾 Save Order</button>
-<button class="new" onclick="newOrder()">🆕 New Order</button>
-
-<div class="section">
-<h2>Daily Sales</h2>
-<h3 id="sales">RM0.00</h3>
-</div>
-
-<div class="section">
-<h2>Order History</h2>
-<div id="orders"></div>
-</div>
-
-</div>
-
-<script>
-
-function val(id){
-return Number(document.getElementById(id).value)||0;
-}
-
-function calculateTotal(){
-
-let total = 0;
-
-total+=val('ayam')*1.2;
-total+=val('daging')*1.5;
-total+=val('kambing')*2;
-total+=val('perut')*1.7;
-total+=val('kulit')*1.7;
-total+=val('tulang')*1.8
-total+=val('impit')*1;
-
-total+=val('lemak')*4;
-total+=val('mata')*1;
-total+=val('merah')*4.5;
-total+=val('rendang')*4.5;
-total+=val('rebus')*1.5;
-total+=val('telurrenderang')*2;
-
-total+=val('nescafep')*3;
-total+=val('nescafes')*4.5;
-
-total+=val('milop')*3;
-total+=val('milos')*4.5;
-
-total+=val('neslop')*4.5;
-total+=val('neslos')*5.5;
-
-total+=val('tehp')*3;
-total+=val('tehs')*4;
-
-total+=val('tehop')*2;
-total+=val('tehos')*2.5;
-
-total+=val('sirap')*3.5;
-total+=val('tebu')*3.5;
-total+=val('jagung')*3.5;
-
-total+=val('anggur')*4.5;
-total+=val('mangga')*4.5;
-total+=val('oren')*4.5;
-
-total+=val('kosong')*0.8;
-total+=val('suam')*0.5;
-
-document.getElementById("total").innerHTML =
-"TOTAL RM" + total.toFixed(2);
-
-return total;
-}
-
-document.addEventListener("input",calculateTotal);
-
-function saveOrder(){
-
-let total = calculateTotal();
-
-let orders =
-JSON.parse(localStorage.getItem("orders")||"[]");
-
-let orderType =
-document.querySelector('input[name="orderType"]:checked').value;
-
-let tableNo =
-document.getElementById("tableNo").value;
-
-let status =
-document.getElementById("orderStatus").value;
- 
-let note =
-document.getElementById("note").value;
-
-orders.push({
-orderNo: orders.length+1,
-date:new Date().toLocaleString(),
-type:orderType,
-table:tableNo,
-status:status,
-note:note,
-total:total
-});
-
-localStorage.setItem(
-"orders",
-JSON.stringify(orders)
-);
-
-loadOrders();
-
- 
-alert("Order Saved Successfully");
-}
-
-function loadOrders(){
-
-let orders =
-JSON.parse(localStorage.getItem("orders")||"[]");
-
-let html="";
-let sales=0;
-
-orders.forEach(order=>{
-
-sales += order.total;
-
-html += `
-<div class="order-card">
-<b>Order #${order.orderNo}</b><br>
-Type: ${order.type}<br>
-Table: ${order.table || "-"}<br>
-Status: ${order.status}<br>
-Note: ${order.note || "-"}<br>
-Total: RM${order.total.toFixed(2)}<br>
-Date: ${order.date}
-</div>
 `;
-
+ 
 });
-
-document.getElementById("orders").innerHTML = html;
-
-document.getElementById("sales").innerHTML =
-"RM"+sales.toFixed(2);
-    
+ 
+document.getElementById(
+'history'
+).innerHTML=html;
+ 
+document.getElementById(
+'sales'
+).innerHTML=
+'RM'+sales.toFixed(2);
+ 
 }
-
+ 
 function newOrder(){
-
-document.querySelectorAll('input[type="number"]')
-.forEach(x=>x.value=0);
-
-document.getElementById('tableNo').value='';
-document.getElementById('note').value='';
-document.getElementById('orderStatus').value='Pending';
-
-calculateTotal();
+ 
+Object.keys(qty)
+.forEach(key=>{
+ 
+qty[key]=0;
+ 
+let el=
+document.getElementById(key);
+ 
+if(el){
+el.innerHTML=0;
 }
-
+ 
+});
+ 
+document.getElementById(
+'cashReceived'
+).value=0;
+ 
+document.getElementById(
+'note'
+).value='';
+ 
+document.getElementById(
+'status'
+).value='Pending';
+ 
+updateSummary();
+ 
+}
+ 
 loadOrders();
-
+updateSummary();
+ 
 </script>
  
 </body>
