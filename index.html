@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Satay Warisan Yati TJ POS</title>
  
 style.css
- 
 </head>
 <body>
  
@@ -14,100 +13,88 @@ style.css
  
 <h1>🍢 Satay Warisan Yati TJ</h1>
  
-<div class="card">
- 
-<h2>Order Type</h2>
+<div class="section">
+<h2>Jenis Pesanan</h2>
  
 <label>
-<input type="radio" name="orderType" value="Dine In" checked>
+<input type="radio" name="orderType" checked>
 Dine In
 </label>
  
 <label>
-<input type="radio" name="orderType" value="Takeaway">
+<input type="radio" name="orderType">
 Takeaway
 </label>
- 
 </div>
  
-<div class="card">
+<div class="section">
  
 <h2>Menu Utama</h2>
  
-<div class="item">
-<label>Sate Ayam</label>
+<div class="row">
+<label>Sate Ayam (RM1.20)</label>
 <input type="number" id="ayam" value="0">
 </div>
  
-<div class="item">
-<label>Sate Daging</label>
+<div class="row">
+<label>Sate Daging (RM1.50)</label>
 <input type="number" id="daging" value="0">
 </div>
  
-<div class="item">
-<label>Sate Kambing</label>
+<div class="row">
+<label>Sate Kambing (RM2.00)</label>
 <input type="number" id="kambing" value="0">
 </div>
  
-<div class="item">
-<label>Sate Perut</label>
+<div class="row">
+<label>Sate Perut (RM1.70)</label>
 <input type="number" id="perut" value="0">
 </div>
  
-<div class="item">
-<label>Sate Kulit</label>
+<div class="row">
+<label>Sate Kulit (RM1.70)</label>
 <input type="number" id="kulit" value="0">
 </div>
  
-<div class="item">
-<label>Sate Tulang</label>
+<div class="row">
+<label>Sate Tulang (RM1.80)</label>
 <input type="number" id="tulang" value="0">
 </div>
  
-<div class="item">
-<label>Nasi Impit</label>
+<div class="row">
+<label>Nasi Impit (RM1.00)</label>
 <input type="number" id="impit" value="0">
 </div>
  
 </div>
  
-<div class="card">
+<div class="section">
  
 <h2>Menu Sampingan</h2>
  
-<button class="food-card" onclick="addNasiLemak()">
-🍛 Nasi Lemak
-</button>
+<div class="menu-grid">
  
-<div id="nasilemakList"></div>
+<div class="card-menu" onclick="addNasiLemak()">
+🍛
+<h3>Nasi Lemak</h3>
+<p>RM4.00</p>
+</div>
  
 </div>
  
-<div class="card">
+</div>
+ 
+<div class="section">
  
 <h2>Order Summary</h2>
  
 <div id="summary">
- 
-No item selected
- 
+Tiada item dipilih
 </div>
  
 <h2 id="total">
- 
 RM0.00
- 
 </h2>
- 
-</div>
- 
-<div class="card">
- 
-<button onclick="saveOrder()">
- 
-💾 Save Order
- 
-</button>
  
 </div>
  
