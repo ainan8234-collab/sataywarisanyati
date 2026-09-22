@@ -505,7 +505,19 @@ margin-top:10px;
 background:#f5f5f5;
 border-radius:8px;
 ">
-<b>Order #${order.orderNo}</b>
+
+<b>Order #${order.orderNo}</b><br><br>
+`;
+
+order.items.forEach(item => {
+
+html += `
+${item.name} x${item.qty}<br>
+`;
+
+});
+
+html += `
 </div>
 `;
 
@@ -519,7 +531,6 @@ document.getElementById("orderHistory").innerHTML =
 html;
 
 }
-``
     window.onload = function(){
     showSate();
 }
