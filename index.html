@@ -152,8 +152,9 @@ body{
 
 </style>
 </head>
-
 <script>
+
+let cart = [];
 
 function qtyPopup(item,price){
 
@@ -162,20 +163,54 @@ let qty = prompt(
 "10"
 );
 
-if(qty==null){
+if(qty===null || qty==="" || qty<=0){
 return;
 }
 
-alert(
-item +
-" x" +
-qty +
-" telah ditambah"
-);
+cart.push({
+name:item,
+qty:Number(qty),
+price:price
+});
+
+renderCart();
+
+}
+
+function renderCart(){
+
+let html = "";
+let total = 0;
+
+cart.forEach((item,index)=>{
+
+let amount =
+item.qty * item.price;
+
+total += amount;
+
+html += `
+<div class="order-item">
+<span>${item.name} x${item.qty}</span>
+<span>RM${amount.toFixed(2)}</span>
+</div>
+`;
+
+});
+
+if(html===""){
+html="Tiada pesanan lagi";
+}
+
+document.getElementById("cartItems").innerHTML = html;
+
+document.getElementById("cartTotal").innerHTML =
+"RM" + total.toFixed(2);
 
 }
 
 </script>
+
 <body>
 
 <div class="container">
@@ -187,21 +222,17 @@ qty +
             <h2>🍢 Satay Warisan Yati</h2>
         </div>
 
-        <button class="category-btn">
-            🍢 Sate
-        </button>
+     <button class="category-btn">
+    🍢 Sate
+</button>
 
-        <button class="category-btn">
-            🍛 Sampingan
-        </button>
+<button class="category-btn">
+    🍛 Sampingan
+</button>
 
-        <button class="category-btn">
-            🥤 Air
-        </button>
-
-        <button class="category-btn">
-            📊 Report
-        </button>
+<button class="category-btn">
+    🥤 Air
+</button>
 
     </div>
 
@@ -247,37 +278,26 @@ qty +
 
     </div>
 
-    <!-- RIGHT -->
-    <div class="cart">
+<!-- RIGHT -->
+<div class="cart">
 
-        <h2>Order Menu</h2>
+    <h2>Order Menu</h2>
 
-        <div class="order-item">
-            <span>Sate Ayam x10</span>
-            <span>RM12.00</span>
-        </div>
-
-        <div class="order-item">
-            <span>Nasi Lemak</span>
-            <span>RM4.00</span>
-        </div>
-
-        <div class="order-item">
-            <span>Teh O Sejuk</span>
-            <span>RM2.50</span>
-        </div>
-
-        <hr>
-
-        <div class="total">
-            RM18.50
-        </div>
-
-        <button class="order-btn">
-            Save Order
-        </button>
-
+    <div id="cartItems">
+        Tiada pesanan lagi
     </div>
+
+    <hr>
+
+    <div class="total" id="cartTotal">
+        RM0.00
+    </div>
+
+    <button class="order-btn">
+        Save Order
+    </button>
+
+</div>
 
 </div>
 
