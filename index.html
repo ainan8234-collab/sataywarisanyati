@@ -149,7 +149,16 @@ body{
 }
 
 }
+#configPanel{
+    margin-top:20px;
+}
 
+.config-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
 </style>
 </head>
 <script>
@@ -210,7 +219,7 @@ document.getElementById("menuTitle").innerHTML =
 
 document.getElementById("productGrid").innerHTML = `
 
-<div class="product-card" onclick="showNasiLemakPopup()">
+<div class="product-card" onclick="showNasiLemakCard()">
 <h3>Nasi Lemak</h3>
 <div class="price">RM4.00</div>
 </div>
@@ -320,69 +329,97 @@ onclick="qtyPopup('${item} Sejuk',${coldPrice})">
 
 }
    
-function showNasiLemakPopup(){
+function showNasiLemakCard(){
 
-let pilihan = prompt(
-`Add On Nasi Lemak
+document.getElementById("configPanel").innerHTML = `
 
-1 = Telur Mata (+RM1.00)
-2 = Ayam Merah (+RM4.50)
-3 = Ayam Rendang (+RM4.50)
-4 = Telur Rebus (+RM1.50)
-5 = Telur Rendang (+RM2.00)
+<div class="config-card">
 
-Contoh:
-1,3`
-);
+<h3>Nasi Lemak</h3>
 
-let total = 4;
+<label>
+<input type="checkbox" id="telurMata">
+Telur Mata (+RM1.00)
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" id="ayamMerah">
+Ayam Merah (+RM4.50)
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" id="ayamRendang">
+Ayam Rendang (+RM4.50)
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" id="telurRebus">
+Telur Rebus (+RM1.50)
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox" id="telurRendang">
+Telur Rendang (+RM2.00)
+</label>
+
+<br><br>
+
+<button onclick="addNasiLemak()">
+Tambah Ke Cart
+</button>
+
+</div>
+
+`;
+
+}
+function addNasiLemak(){
+
 let nama = "Nasi Lemak";
+let total = 4;
 
-if(!pilihan){
-
-cart.push({
-    name:nama,
-    qty:1,
-    price:total
-});
-
-renderCart();
-return;
-
+if(document.getElementById("telurMata").checked){
+nama += " + Telur Mata";
+total += 1;
 }
 
-if(pilihan.includes("1")){
-    total += 1;
-    nama += " + Telur Mata";
+if(document.getElementById("ayamMerah").checked){
+nama += " + Ayam Merah";
+total += 4.5;
 }
 
-if(pilihan.includes("2")){
-    total += 4.5;
-    nama += " + Ayam Merah";
+if(document.getElementById("ayamRendang").checked){
+nama += " + Ayam Rendang";
+total += 4.5;
 }
 
-if(pilihan.includes("3")){
-    total += 4.5;
-    nama += " + Ayam Rendang";
+if(document.getElementById("telurRebus").checked){
+nama += " + Telur Rebus";
+total += 1.5;
 }
 
-if(pilihan.includes("4")){
-    total += 1.5;
-    nama += " + Telur Rebus";
-}
-
-if(pilihan.includes("5")){
-    total += 2;
-    nama += " + Telur Rendang";
+if(document.getElementById("telurRendang").checked){
+nama += " + Telur Rendang";
+total += 2;
 }
 
 cart.push({
-    name:nama,
-    qty:1,
-    price:total
+name:nama,
+qty:1,
+price:total
 });
 
 renderCart();
+
+document.getElementById("configPanel").innerHTML = "";
 
 }
 
@@ -571,9 +608,9 @@ html;
 
     <h2 id="menuTitle">Menu Utama</h2>
 
- <div class="product-grid" id="productGrid">
+<div class="product-grid" id="productGrid"></div>
 
-</div>
+<div id="configPanel"></div>
         
         </div>
 
