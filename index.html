@@ -1,65 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satay Warisan Yati TJ POS</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:15px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+h1,h2{
+    text-align:center;
+}
+
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:8px 0;
+}
+
+.qty-control{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.qty-btn{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    font-size:18px;
+    background:#007bff;
+    color:white;
+}
+
+.qty{
+    min-width:25px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.summary{
+    background:#fff8dc;
+}
+
+.total{
+    font-size:28px;
+    text-align:center;
+    color:green;
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+button.action{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    margin-top:8px;
+}
+
+.save{background:green;}
+.new{background:orange;}
+.paid{background:#007bff;}
+
+.order-card{
+    border:1px solid #ddd;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🍢 Satay Warisan Yati TJ POS</h1>
+
+<div class="card">
+
+<h2>Order Information</h2>
+
+<label>
+<input type="radio" name="orderType" value="Dine In" checked>
+Dine In
+</label>
+
+<label>
+<input type="radio" name="orderType" value="Takeaway">
+Takeaway
+</label>
+
+<label>Order Status</label>
+<select id="status">
+<option>Pending</option>
+<option>Paid</option>
+<option>Cancelled</option>
+</select>
+
+<label>Payment Method</label>
+<select id="payment">
+<option>Cash</option>
+<option>QR</option>
+<option>Bank Transfer</option>
+</select>
+
+<label>Customer Note</label>
+<input type="text" id="note">
+
+</div>
+
+<div class="card">
+
+<h2>Menu Utama</h2>
+
+<div id="menu"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Menu Sampingan</h2>
+
+<div id="sampingan"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Air</h2>
+
+<div id="air"></div>
+
+</div>
+
+<div class="card summary">
+
+<h2>Current Order</h2>
+
+<div id="summary">
+No item selected
+</div>
+
+<hr>
+
+<div class="total" id="total">
+RM0.00
+</div>
+
+<label>Cash Received</label>
+<input type="number" id="cashReceived" value="0">
+
+<label>Balance / Change</label>
+<input type="text" id="change" readonly>
+
+<button class="action save" onclick="saveOrder()">
+💾 Save Order
+</button>
+
+<button class="action paid" onclick="markPaid()">
+✅ Mark Paid
+</button>
+
+<button class="action new" onclick="newOrder()">
+🆕 New Order
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Daily Sales</h2>
+
+<h3 id="sales">
+RM0.00
+</h3>
+
+</div>
+
+<div class="card">
+
+<h2>Order History</h2>
+
+<div id="history"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const menuItems = [
+
+{name:"Sate Ayam",price:1.2},
+{name:"Sate Daging",price:1.5},
+{name:"Sate Kambing",price:2.0},
+{name:"Sate Perut",price:1.7},
+{name:"Sate Kulit",price:1.7},
+{name:"Sate Tulang",price:1.8},
+{name:"Nasi Impit",price:1.0}
+
+];
+
+const sampinganItems=[
+
+{name:"Nasi Lemak",price:4},
+{name:"Telur Mata",price:1},
+{name:"Ayam Merah",price:4.5},
+{name:"Ayam Rendang",price:4.5},
+{name:"Telur Rebus",price:1.5},
+{name:"Telur Rendang",price:2}
+
+];
+
+const airItems=[
+
+{name:"Nescafe Panas",price:3},
+{name:"Nescafe Sejuk",price:4.5},
+{name:"Milo Panas",price:3},
+{name:"Milo Sejuk",price:4.5},
+{name:"Neslo Panas",price:4.5},
+{name:"Neslo Sejuk",price:5.5},
+{name:"Teh Panas",price:3},
+{name:"Teh Sejuk",price:4},
+{name:"Teh O Panas",price:2},
+{name:"Teh O Sejuk",price:2.5},
+{name:"Sirap Ais",price:3.5},
+{name:"Tebu Ais",price:3.5},
+{name:"Jagung Ais",price:3.5},
+{name:"Extrajoss Anggur",price:4.5},
+{name:"Extrajoss Mangga",price:4.5},
+{name:"Extrajoss Oren",price:4.5},
+{name:"Air Kosong",price:0.8},
+{name:"Air Suam",price:0.5}
+
+];
+
+let qty={};
+
+function createMenu(list,container){
+
+let html='';
+
+list.forEach(item=>{
+
+qty[item.name]=0;
+
+html+=`
+<div class="menu-item">
+
+<span>
+${item.name}<br>
+RM${item.price.toFixed(2)}
+</span>
+
+<div class="qty-control">
+<button class="qty-btn"
+onclick="changeQty('${item.name}',-1)">
+-
+</button>
+
+<span class="qty"
+id="${item.name}">
+0
+</span>
+
+<button class="qty-btn"
+onclick="changeQty('${item.name}',1)">
++
+</button>
+
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById(container).innerHTML=html;
+}
+
+createMenu(menuItems,"menu");
+createMenu(sampinganItems,"sampingan");
+createMenu(airItems,"air");
+
+function changeQty(item,value){
+
+qty[item]+=value;
+
+if(qty[item]<0){
+qty[item]=0;
+}
+
+document.getElementById(item).innerHTML=
+qty[item];
+
+updateSummary();
+}
+
+function updateSummary(){
+
+let all=
+[...menuItems,...sampinganItems,...airItems];
+
+let html='';
+let total=0;
+
+all.forEach(item=>{
+
+if(qty[item.name]>0){
+
+let amount=
+qty[item.name]*item.price;
+
+total+=amount;
+
+html+=`
+${item.name}
+x ${qty[item.name]}
+=
+RM${amount.toFixed(2)}
+<br>
+`;
+
+}
+
+});
+
+if(html===''){
+html='No item selected';
+}
+
+document.getElementById('summary').innerHTML=html;
+
+document.getElementById('total').innerHTML=
+'RM'+total.toFixed(2);
+
+let cash=
+Number(
+document.getElementById(
+'cashReceived'
+).value
+)||0;
+
+document.getElementById('change').value=
+'RM '+(cash-total).toFixed(2);
+
+return total;
+}
+
+document
+.getElementById('cashReceived')
+.addEventListener(
+'input',
+updateSummary
+);
+
+function markPaid(){
+
+document.getElementById('status').value='Paid';
+
+alert('Order Marked Paid');
+
+}
+
+function saveOrder(){
+
+let orders=
+JSON.parse(
+localStorage.getItem('orders')||'[]'
+);
+
+let total=updateSummary();
+
+orders.push({
+
+orderNo:orders.length+1,
+
+date:new Date().toLocaleString(),
+
+type:
+document.querySelector(
+'input[name="orderType"]:checked'
+).value,
+
+status:
+document.getElementById(
+'status'
+).value,
+
+payment:
+document.getElementById(
+'payment'
+).value,
+
+note:
+document.getElementById(
+'note'
+).value,
+
+total:total
+
+});
+
+localStorage.setItem(
+'orders',
+JSON.stringify(orders)
+);
+
+loadOrders();
+
+alert("Order Saved");
+
+}
+
+function loadOrders(){
+
+let orders=
+JSON.parse(
+localStorage.getItem('orders')||'[]'
+);
+
+let html='';
+let sales=0;
+
+orders.forEach(order=>{
+
+sales+=order.total;
+
+html+=`
+
+<div class="order-card">
+
+<b>Order #${order.orderNo}</b><br>
+
+${order.type}<br>
+
+Status:
 ${order.status}<br>
- 
+
 Payment:
 ${order.payment}<br>
- 
+
 RM${order.total.toFixed(2)}<br>
- 
+
 ${order.date}
- 
+
 </div>
- 
+
 `;
- 
+
 });
- 
+
 document.getElementById(
 'history'
 ).innerHTML=html;
- 
+
 document.getElementById(
 'sales'
 ).innerHTML=
 'RM'+sales.toFixed(2);
- 
+
 }
- 
+
 function newOrder(){
- 
+
 Object.keys(qty)
 .forEach(key=>{
- 
+
 qty[key]=0;
- 
+
 let el=
 document.getElementById(key);
- 
+
 if(el){
 el.innerHTML=0;
 }
- 
+
 });
- 
+
 document.getElementById(
 'cashReceived'
 ).value=0;
- 
+
 document.getElementById(
 'note'
 ).value='';
- 
+
 document.getElementById(
 'status'
 ).value='Pending';
- 
+
 updateSummary();
- 
+
 }
- 
+
 loadOrders();
 updateSummary();
- 
+
 </script>
- 
+
 </body>
 </html>
