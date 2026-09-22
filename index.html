@@ -155,6 +155,8 @@ body{
 <script>
 
 let cart = [];
+let savedOrders = [];
+let orderNo = 1;
 function showSate(){
 
 document.getElementById("menuTitle").innerHTML =
@@ -201,10 +203,6 @@ document.getElementById("productGrid").innerHTML = `
 
 }
 function showSampingan(){
- 
-alert("Butang Sampingan Berfungsi");
- 
-}    
 
 document.getElementById("menuTitle").innerHTML =
 "🍛 Menu Sampingan";
@@ -219,7 +217,82 @@ document.getElementById("productGrid").innerHTML = `
 `;
 
 }
-function airPopup(item,hotPrice,coldPrice){
+    function showAir(){
+
+document.getElementById("menuTitle").innerHTML =
+"🥤 Menu Air";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card" onclick="airPopup('Teh O',2.00,2.50)">
+<h3>Teh O</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Teh',3.00,4.00)">
+<h3>Teh</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Milo',3.00,4.50)">
+<h3>Milo</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Nescafe',3.00,4.50)">
+<h3>Nescafe</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Neslo',4.50,5.50)">
+<h3>Neslo</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Sirap',3.50,3.50)">
+<h3>Sirap</h3>
+<div class="price">RM3.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Tebu',3.50,3.50)">
+<h3>Tebu</h3>
+<div class="price">RM3.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Jagung',3.50,3.50)">
+<h3>Jagung</h3>
+<div class="price">RM3.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Extrajoss Anggur',4.50,4.50)">
+<h3>Extrajoss Anggur</h3>
+<div class="price">RM4.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Extrajoss Mangga',4.50,4.50)">
+<h3>Extrajoss Mangga</h3>
+<div class="price">RM4.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Extrajoss Oren',4.50,4.50)">
+<h3>Extrajoss Oren</h3>
+<div class="price">RM4.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Air Suam',0.50,0.50)">
+<h3>Air Suam</h3>
+<div class="price">RM0.50</div>
+</div>
+
+<div class="product-card" onclick="airPopup('Air Kosong',0.80,0.80)">
+<h3>Air Kosong</h3>
+<div class="price">RM0.80</div>
+</div>
+
+`;
+
+}
+    function airPopup(item,hotPrice,coldPrice){
 
 let panas = confirm(
 item + "\n\nOK = Panas\nCancel = Sejuk"
@@ -313,41 +386,7 @@ price:price
 renderCart();
 
 }
-function airPopup(item,hotPrice,coldPrice){
 
-let panas = confirm(
-item + "\n\nOK = Panas\nCancel = Sejuk"
-);
-
-let jenis;
-let harga;
-
-if(panas){
-    jenis = " Panas";
-    harga = hotPrice;
-}else{
-    jenis = " Sejuk";
-    harga = coldPrice;
-}
-
-let qty = prompt(
-"Masukkan kuantiti",
-"1"
-);
-
-if(qty===null || qty==="" || qty<=0){
-    return;
-}
-
-cart.push({
-    name:item + jenis,
-    qty:Number(qty),
-    price:harga
-});
-
-renderCart();
-
-}
 function renderCart(){
 
 let html = "";
@@ -363,7 +402,23 @@ total += amount;
 html += `
 <div class="order-item">
 <span>${item.name} x${item.qty}</span>
-<span>RM${amount.toFixed(2)}</span>
+
+<span>
+RM${amount.toFixed(2)}
+<button onclick="deleteItem(${index})"
+style="
+margin-left:8px;
+background:red;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+padding:3px 8px;
+">
+❌
+</button>
+</span>
+
 </div>
 `;
 
@@ -379,7 +434,66 @@ document.getElementById("cartTotal").innerHTML =
 "RM" + total.toFixed(2);
 
 }
-window.onload = function(){
+function deleteItem(index){
+
+cart.splice(index,1);
+
+renderCart();
+
+}
+function saveOrder(){
+
+if(cart.length === 0){
+    alert("Tiada pesanan untuk disimpan");
+    return;
+}
+
+savedOrders.push({
+    orderNo: orderNo,
+    items: [...cart]
+});
+
+renderOrderHistory();
+
+alert("Order #" + orderNo + " berjaya disimpan");
+
+orderNo++;
+
+cart = [];
+
+renderCart();
+
+}
+
+function renderOrderHistory(){
+
+let html = "";
+
+savedOrders.forEach(order => {
+
+html += `
+<div style="
+padding:10px;
+margin-top:10px;
+background:#f5f5f5;
+border-radius:8px;
+">
+<b>Order #${order.orderNo}</b>
+</div>
+`;
+
+});
+
+if(html===""){
+html = "Tiada order lagi";
+}
+
+document.getElementById("orderHistory").innerHTML =
+html;
+
+}
+``
+    window.onload = function(){
     showSate();
 }
 </script>
@@ -433,13 +547,21 @@ window.onload = function(){
 
     <hr>
 
-    <div class="total" id="cartTotal">
-        RM0.00
-    </div>
+<div class="total" id="cartTotal">
+    RM0.00
+</div>
 
-    <button class="order-btn">
-        Save Order
-    </button>
+<button class="order-btn" onclick="saveOrder()">
+    Save Order
+</button>
+
+<hr>
+
+<h3>Order History</h3>
+
+<div id="orderHistory">
+Tiada order lagi
+</div>
 
 </div>
 
