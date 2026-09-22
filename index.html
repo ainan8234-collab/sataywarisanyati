@@ -155,7 +155,103 @@ body{
 <script>
 
 let cart = [];
+function showSate(){
 
+document.getElementById("menuTitle").innerHTML =
+"🍢 Menu Sate";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card" onclick="qtyPopup('Sate Ayam',1.20)">
+<h3>Sate Ayam</h3>
+<div class="price">RM1.20</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Sate Daging',1.50)">
+<h3>Sate Daging</h3>
+<div class="price">RM1.50</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Sate Kambing',2.00)">
+<h3>Sate Kambing</h3>
+<div class="price">RM2.00</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Sate Perut',1.70)">
+<h3>Sate Perut</h3>
+<div class="price">RM1.70</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Sate Kulit',1.70)">
+<h3>Sate Kulit</h3>
+<div class="price">RM1.70</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Sate Tulang',1.80)">
+<h3>Sate Tulang</h3>
+<div class="price">RM1.80</div>
+</div>
+
+<div class="product-card" onclick="qtyPopup('Nasi Impit',1.00)">
+<h3>Nasi Impit</h3>
+<div class="price">RM1.00</div>
+</div>
+
+`;
+
+}
+    function showSampingan(){
+
+document.getElementById("menuTitle").innerHTML =
+"🍛 Menu Sampingan";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card" onclick="showNasiLemakPopup()">
+<h3>Nasi Lemak</h3>
+<div class="price">RM4.00</div>
+</div>
+
+`;
+
+}
+function showAir(){
+
+document.getElementById("menuTitle").innerHTML =
+"🥤 Menu Air";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card">
+<h3>Teh O</h3>
+<div class="price">Klik</div>
+</div>
+
+<div class="product-card">
+<h3>Teh</h3>
+<div class="price">Klik</div>
+</div>
+
+<div class="product-card">
+<h3>Milo</h3>
+<div class="price">Klik</div>
+</div>
+
+<div class="product-card">
+<h3>Nescafe</h3>
+<div class="price">Klik</div>
+</div>
+
+`;
+
+}
+    function showNasiLemakPopup(){
+
+alert(
+"Nasi Lemak Add-On akan dibuat langkah seterusnya"
+);
+
+}
 function qtyPopup(item,price){
 
 let qty = prompt(
@@ -208,7 +304,9 @@ document.getElementById("cartTotal").innerHTML =
 "RM" + total.toFixed(2);
 
 }
-
+window.onload = function(){
+    showSate();
+}
 </script>
 
 <body>
@@ -222,73 +320,29 @@ document.getElementById("cartTotal").innerHTML =
             <h2>🍢 Satay Warisan Yati</h2>
         </div>
 
-     <button class="category-btn">
+ <button class="category-btn" onclick="showSate()">
     🍢 Sate
 </button>
 
-<button class="category-btn">
+<button class="category-btn" onclick="showSampingan()">
     🍛 Sampingan
 </button>
 
-<button class="category-btn">
+<button class="category-btn" onclick="showAir()">
     🥤 Air
 </button>
 
     </div>
 
     <!-- CENTER -->
-    <div class="products">
+   <div class="products">
 
-        <h2>Menu Utama</h2>
+    <h2 id="menuTitle">Menu Utama</h2>
 
-        <div class="product-grid">
+ <div class="product-grid" id="productGrid">
 
-<div class="product-card" onclick="qtyPopup('Sate Ayam',1.20)">
-<h3>Sate Ayam</h3>
-<div class="price">RM1.20</div>
-</div>
-
-<div class="product-card" onclick="qtyPopup('Sate Daging',1.50)">
-<h3>Sate Daging</h3>
-<div class="price">RM1.50</div>
-</div>
-
-<div class="product-card" onclick="qtyPopup('Sate Kambing',2.00)">
-<h3>Sate Kambing</h3>
-<div class="price">RM2.00</div>
 </div>
         
-
-<div class="product-card" onclick="qtyPopup('Sate Perut',1.50)">
-<h3>Sate Perut</h3>
-<div class="price">RM1.50</div>
-</div>
-
-<div class="product-card" onclick="qtyPopup('Sate Kulit',1.70)">
-<h3>Sate Kulit</h3>
-<div class="price">RM1.70</div>
-</div>
-
-<div class="product-card" onclick="qtyPopup('Sate Tulang',1.80)">
-<h3>Sate Tulang</h3>
-<div class="price">RM1.80</div>
-</div>
-
-<div class="product-card" onclick="qtyPopup('Nasi Impit',1.00)">
-<h3>Nasi Impit</h3>
-<div class="price">RM1.00</div>
-</div>
-            
-            <div class="product-card">
-                <h3>Nasi Lemak</h3>
-                <div class="price">RM4.00</div>
-            </div>
-
-            <div class="product-card">
-                <h3>Teh O Sejuk</h3>
-                <div class="price">RM2.50</div>
-            </div>
-
         </div>
 
     </div>
