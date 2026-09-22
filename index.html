@@ -219,41 +219,78 @@ document.getElementById("productGrid").innerHTML = `
 `;
 
 }
-function showAir(){
+function airPopup(item,hotPrice,coldPrice){
 
-document.getElementById("menuTitle").innerHTML =
-"🥤 Menu Air";
+let panas = confirm(
+item + "\n\nOK = Panas\nCancel = Sejuk"
+);
 
-document.getElementById("productGrid").innerHTML = `
+let jenis;
+let harga;
 
-<div class="product-card">
-<h3>Teh O</h3>
-<div class="price">Klik</div>
-</div>
+if(panas){
+    jenis = " Panas";
+    harga = hotPrice;
+}else{
+    jenis = " Sejuk";
+    harga = coldPrice;
+}
 
-<div class="product-card">
-<h3>Teh</h3>
-<div class="price">Klik</div>
-</div>
+let qty = prompt(
+"Masukkan Kuantiti",
+"1"
+);
 
-<div class="product-card">
-<h3>Milo</h3>
-<div class="price">Klik</div>
-</div>
+if(qty===null || qty==="" || qty<=0){
+    return;
+}
 
-<div class="product-card">
-<h3>Nescafe</h3>
-<div class="price">Klik</div>
-</div>
+cart.push({
+    name:item + jenis,
+    qty:Number(qty),
+    price:harga
+});
 
-`;
+renderCart();
 
 }
-    function showNasiLemakPopup(){
+function showNasiLemakPopup(){
 
-alert(
-"Nasi Lemak Add-On akan dibuat langkah seterusnya"
-);
+let total = 4;
+let nama = "Nasi Lemak";
+
+if(confirm("Tambah Telur Mata?")){
+    total += 1;
+    nama += " + Telur Mata";
+}
+
+if(confirm("Tambah Ayam Merah?")){
+    total += 4.5;
+    nama += " + Ayam Merah";
+}
+
+if(confirm("Tambah Ayam Rendang?")){
+    total += 4.5;
+    nama += " + Ayam Rendang";
+}
+
+if(confirm("Tambah Telur Rebus?")){
+    total += 1.5;
+    nama += " + Telur Rebus";
+}
+
+if(confirm("Tambah Telur Rendang?")){
+    total += 2;
+    nama += " + Telur Rendang";
+}
+
+cart.push({
+    name:nama,
+    qty:1,
+    price:total
+});
+
+renderCart();
 
 }
 function qtyPopup(item,price){
@@ -276,7 +313,41 @@ price:price
 renderCart();
 
 }
+function airPopup(item,hotPrice,coldPrice){
 
+let panas = confirm(
+item + "\n\nOK = Panas\nCancel = Sejuk"
+);
+
+let jenis;
+let harga;
+
+if(panas){
+    jenis = " Panas";
+    harga = hotPrice;
+}else{
+    jenis = " Sejuk";
+    harga = coldPrice;
+}
+
+let qty = prompt(
+"Masukkan kuantiti",
+"1"
+);
+
+if(qty===null || qty==="" || qty<=0){
+    return;
+}
+
+cart.push({
+    name:item + jenis,
+    qty:Number(qty),
+    price:harga
+});
+
+renderCart();
+
+}
 function renderCart(){
 
 let html = "";
