@@ -1,6 +1,6 @@
 body{
 font-family:Arial,sans-serif;
-background:#f5f5f5;
+background:#f4f4f4;
 margin:0;
 padding:15px;
 }
@@ -10,24 +10,23 @@ max-width:900px;
 margin:auto;
 }
  
-.card{
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
- 
-h1,h2{
+h1{
 text-align:center;
 }
  
-.item{
-display:grid;
-grid-template-columns:1fr 90px;
-gap:10px;
-margin:8px 0;
+.section{
+background:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+ 
+.row{
+display:flex;
+justify-content:space-between;
 align-items:center;
+margin-bottom:10px;
 }
  
 input[type="number"]{
@@ -35,24 +34,27 @@ width:80px;
 padding:8px;
 }
  
-.food-card{
-width:100%;
-padding:20px;
-font-size:20px;
-background:#fff8dc;
-border:2px solid orange;
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+gap:10px;
+}
+ 
+.card-menu{
+background:#fff3cd;
+border:2px solid #ffc107;
 border-radius:10px;
+padding:15px;
+text-align:center;
 cursor:pointer;
 }
  
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:8px;
-background:green;
-color:white;
-font-size:16px;
+.card-menu:hover{
+background:#ffe69c;
+}
+ 
+.card-menu h3{
+margin:10px 0;
 }
  
 #summary{
@@ -61,4 +63,5 @@ line-height:1.8;
  
 #total{
 color:green;
+text-align:center;
 }
