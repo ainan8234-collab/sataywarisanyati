@@ -153,6 +153,29 @@ body{
 </style>
 </head>
 
+<script>
+
+function qtyPopup(item,price){
+
+let qty = prompt(
+"Masukkan kuantiti untuk " + item,
+"10"
+);
+
+if(qty==null){
+return;
+}
+
+alert(
+item +
+" x" +
+qty +
+" telah ditambah"
+);
+
+}
+
+</script>
 <body>
 
 <div class="container">
@@ -189,25 +212,26 @@ body{
 
         <div class="product-grid">
 
-            <div class="product-card">
-                <h3>Sate Ayam</h3>
-                <div class="price">RM1.20</div>
-            </div>
+<div class="product-card" onclick="qtyPopup('Sate Ayam',1.20)">
+<h3>Sate Ayam</h3>
+<div class="price">RM1.20</div>
+</div>
 
-            <div class="product-card">
-                <h3>Sate Daging</h3>
-                <div class="price">RM1.50</div>
-            </div>
+<div class="product-card" onclick="qtyPopup('Sate Daging',1.50)">
+<h3>Sate Daging</h3>
+<div class="price">RM1.50</div>
+</div>
 
-            <div class="product-card">
-                <h3>Sate Kambing</h3>
-                <div class="price">RM2.00</div>
-            </div>
+<div class="product-card" onclick="qtyPopup('Sate Kambing',2.00)">
+<h3>Sate Kambing</h3>
+<div class="price">RM2.00</div>
+</div>
+        
 
-            <div class="product-card">
-                <h3>Sate Perut</h3>
-                <div class="price">RM1.70</div>
-            </div>
+<div class="product-card" onclick="qtyPopup('Sate Perut',1.50)">
+<h3>Sate Perut</h3>
+<div class="price">RM1.50</div>
+</div>
 
             <div class="product-card">
                 <h3>Nasi Lemak</h3>
