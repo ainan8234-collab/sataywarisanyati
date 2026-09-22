@@ -1,122 +1,109 @@
-let nasiLemakOrders=[];
+let nasiLemakList = [];
 
 function addNasiLemak(){
 
-let telurMata =
-confirm("Add Telur Mata?");
+  let addons = [];
 
-let ayamRendang =
-confirm("Add Ayam Rendang?");
+  if(confirm("Tambah Telur Mata?")){
+    addons.push({
+      name:"Telur Mata",
+      price:1
+    });
+  }
 
-let total = 4;
+  if(confirm("Tambah Ayam Rendang?")){
+    addons.push({
+      name:"Ayam Rendang",
+      price:4.5
+    });
+  }
 
-let addons=[];
+  let total = 4;
 
-if(telurMata){
-total += 1;
-addons.push("Telur Mata");
-}
+  addons.forEach(x=>{
+    total += x.price;
+  });
 
-if(ayamRendang){
-total += 4.5;
-addons.push("Ayam Rendang");
-}
+  nasiLemakList.push({
+    addons:addons,
+    total:total
+  });
 
-nasiLemakOrders.push({
-addons:addons,
-price:total
-});
-
-updateSummary();
-
+  updateSummary();
 }
 
 function updateSummary(){
 
-let total=0;
+  let total = 0;
+  let text = "";
 
-let summary='';
+  const menu = [
 
-const items=[
+    ["ayam","Sate Ayam",1.2],
+    ["daging","Sate Daging",1.5],
+    ["kambing","Sate Kambing",2],
+    ["perut","Sate Perut",1.7],
+    ["kulit","Sate Kulit",1.7],
+    ["tulang","Sate Tulang",1.8],
+    ["impit","Nasi Impit",1]
 
-["ayam","Sate Ayam",1.2],
-["daging","Sate Daging",1.5],
-["kambing","Sate Kambing",2],
-["perut","Sate Perut",1.7],
-["kulit","Sate Kulit",1.7],
-["tulang","Sate Tulang",1.8],
-["impit","Nasi Impit",1]
+  ];
 
-];
+  menu.forEach(item=>{
 
-items.forEach(item=>{
+    let qty =
+    Number(document.getElementById(item[0]).value);
 
-let qty=
-Number(
-document.getElementById(item[0]).value
-)||0;
+    if(qty>0){
 
-if(qty>0){
+      let amount = qty * item[2];
 
-let amount=
-qty*item[2];
+      text +=
+      item[1] +
+      " x " +
+      qty +
+      " = RM" +
+      amount.toFixed(2) +
+      "<br>";
 
-total+=amount;
+      total += amount;
+    }
+  });
 
-summary +=
-item[1]+
-" x "+qty+
-" = RM"+
-amount.toFixed(2)+
-"<br>";
+  nasiLemakList.forEach((item,index)=>{
 
-}
+    text +=
+    "<br>🍛 Nasi Lemak #" +
+    (index+1) +
+    " RM" +
+    item.total.toFixed(2) +
+    "<br>";
 
-});
+    item.addons.forEach(addon=>{
 
-nasiLemakOrders.forEach((n,index)=>{
+      text +=
+      "&nbsp;&nbsp;+ " +
+      addon.name +
+      "<br>";
 
-total += n.price;
+    });
 
-summary +=
-"🍛 Nasi Lemak #"+
-(index+1)+
-" RM"+
-n.price.toFixed(2)+
-"<br>";
+    total += item.total;
 
-if(n.addons.length){
+  });
 
-summary +=
-"&nbsp;&nbsp;+"+
-n.addons.join(", ")+
-"<br>";
+  if(text===""){
+    text="Tiada item dipilih";
+  }
 
-}
+  document.getElementById("summary").innerHTML =
+  text;
 
-});
-
-if(summary===""){
-summary="No item selected";
-}
-
-document.getElementById("summary")
-.innerHTML=summary;
-
-document.getElementById("total")
-.innerHTML=
-"RM"+
-total.toFixed(2);
-
-}
-
-function saveOrder(){
-
-alert("Order Saved");
-
+  document.getElementById("total").innerHTML =
+  "RM" + total.toFixed(2);
 }
 
 document.addEventListener(
-"input",
-updateSummary
+  "input",
+  updateSummary
 );
