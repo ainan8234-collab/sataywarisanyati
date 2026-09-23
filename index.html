@@ -226,40 +226,106 @@ document.getElementById("productGrid").innerHTML = `
 
 }
 function showNasiLemak(){
+
 document.getElementById("configPanel").innerHTML = "";
+
 document.getElementById("menuTitle").innerHTML =
 "🍛 Menu Nasi Lemak";
 
 document.getElementById("productGrid").innerHTML = `
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak Biasa',3.00)">
-<h3>🍛 Nasi Lemak Biasa</h3>
-<div class="price">RM3.00</div>
+<div class="product-card"
+onclick="showNasiLemakOption()">
+
+<h3>🍛 Nasi Lemak</h3>
+
+<div class="price">
+Pilih Add On
 </div>
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak + Telur Mata',4.00)">
-<h3>🍳 Nasi Lemak + Telur Mata</h3>
-<div class="price">RM4.00</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak + Ayam Merah',7.50)">
-<h3>🍗 Nasi Lemak + Ayam Merah</h3>
-<div class="price">RM7.50</div>
+`;
+
+}
+    function showNasiLemakOption(){
+
+document.getElementById("menuTitle").innerHTML =
+"🍛 Pilihan Nasi Lemak";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card"
+onclick="showNasiLemak()">
+
+<h3>⬅️ Kembali</h3>
+
 </div>
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak + Ayam Rendang',7.50)">
-<h3>🍗 Nasi Lemak + Ayam Rendang</h3>
-<div class="price">RM7.50</div>
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak Biasa',3.00)">
+
+<h3>🍛 Biasa</h3>
+
+<div class="price">
+RM3.00
 </div>
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak + Telur Rebus',4.50)">
-<h3>🥚 Nasi Lemak + Telur Rebus</h3>
-<div class="price">RM4.50</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Nasi Lemak + Telur Rendang',5.00)">
-<h3>🥚 Nasi Lemak + Telur Rendang</h3>
-<div class="price">RM5.00</div>
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Mata',4.00)">
+
+<h3>🍳 Telur Mata</h3>
+
+<div class="price">
+RM4.00
+</div>
+
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Ayam Merah',7.50)">
+
+<h3>🍗 Ayam Merah</h3>
+
+<div class="price">
+RM7.50
+</div>
+
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Ayam Rendang',7.50)">
+
+<h3>🍗 Ayam Rendang</h3>
+
+<div class="price">
+RM7.50
+</div>
+
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Rebus',4.50)">
+
+<h3>🥚 Telur Rebus</h3>
+
+<div class="price">
+RM4.50
+</div>
+
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Rendang',5.00)">
+
+<h3>🥚 Telur Rendang</h3>
+
+<div class="price">
+RM5.00
+</div>
+
 </div>
 
 `;
