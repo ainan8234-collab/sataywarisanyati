@@ -189,19 +189,19 @@ document.getElementById("productGrid").innerHTML = `
 <div class="price">RM2.00</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Sate Perut',1.70)">
+<div class="product-card" onclick="qtyPopup('Sate Perut',1.50)">
 <h3>Sate Perut</h3>
-<div class="price">RM1.70</div>
+<div class="price">RM1.50</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Sate Kulit',1.70)">
+<div class="product-card" onclick="qtyPopup('Sate Kulit',1.30)">
 <h3>Sate Kulit</h3>
-<div class="price">RM1.70</div>
+<div class="price">RM1.30</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Sate Tulang',1.80)">
+<div class="product-card" onclick="qtyPopup('Sate Tulang',1.30)">
 <h3>Sate Tulang</h3>
-<div class="price">RM1.80</div>
+<div class="price">RM1.30</div>
 </div>
 
 <div class="product-card" onclick="qtyPopup('Nasi Impit',1.00)">
@@ -234,17 +234,17 @@ document.getElementById("menuTitle").innerHTML =
 
 document.getElementById("productGrid").innerHTML = `
 
-<div class="product-card" onclick="showAirOption('Teh O',2.00,2.50)">
+<div class="product-card" onclick="showAirOption('Teh O',1.50,2.00)">
 <h3>Teh O</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Teh',3.00,4.00)">
+<div class="product-card" onclick="showAirOption('Teh',2.50,3.00)">
 <h3>Teh</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Milo',3.00,4.50)">
+<div class="product-card" onclick="showAirOption('Milo',3.50,4.50)">
 <h3>Milo</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
@@ -259,42 +259,42 @@ document.getElementById("productGrid").innerHTML = `
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Sirap',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Sirap',1.50,2.00)">
 <h3>Sirap</h3>
-<div class="price">RM3.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Tebu',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Tebu',1.50,2.00)">
 <h3>Tebu</h3>
-<div class="price">RM3.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Jagung',3.50,3.50)">
+<div class="product-card" onclick="showAirOption('Jagung',1.50,2.00)">
 <h3>Jagung</h3>
-<div class="price">RM3.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Extrajoss Anggur',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Anggur',3.50,4.00)">
 <h3>Extrajoss Anggur</h3>
-<div class="price">RM4.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Extrajoss Mangga',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Mangga',3.50,4.00)">
 <h3>Extrajoss Mangga</h3>
-<div class="price">RM4.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Extrajoss Oren',4.50,4.50)">
+<div class="product-card" onclick="showAirOption('Extrajoss Oren',3.50,4.00)">
 <h3>Extrajoss Oren</h3>
-<div class="price">RM4.50</div>
+<div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Air Suam',0.50,0.50)">
+<div class="product-card" onclick="qtyPopup('Air Suam',0.20)">
 <h3>Air Suam</h3>
-<div class="price">RM0.50</div>
+<div class="price">RM0.20</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Air Kosong',0.80,0.80)">
+<div class="product-card" onclick="qtyPopup('Air Kosong',0.80)">
 <h3>Air Kosong</h3>
 <div class="price">RM0.80</div>
 </div>
@@ -384,7 +384,7 @@ Tambah Ke Cart
 function addNasiLemak(){
 
 let nama = "Nasi Lemak";
-let total = 4;
+let total = 3;
 
 if(document.getElementById("telurMata").checked){
 nama += " + Telur Mata";
@@ -401,9 +401,9 @@ nama += " + Ayam Rendang";
 total += 4.5;
 }
 
-if(document.getElementById("telurRebus").checked){
+if(document.getElementById("telurRebusSebiji").checked){
 nama += " + Telur Rebus";
-total += 1.5;
+total += 1.0;
 }
 
 if(document.getElementById("telurRendang").checked){
@@ -434,8 +434,13 @@ if(qty===null || qty==="" || qty<=0){
 return;
 }
 
+let note = prompt(
+"Catatan? (Kurang manis, kurang ais, dll)",
+""
+);
+ 
 cart.push({
-name:item,
+name:item + (note ? " (" + note + ")" : ""),
 qty:Number(qty),
 price:price
 });
@@ -504,9 +509,17 @@ if(cart.length === 0){
     alert("Tiada pesanan untuk disimpan");
     return;
 }
+let customerName = prompt(
+"Nama pelanggan?",
+""
+);
 
+if(customerName === null){
+    return;
+}
 savedOrders.push({
     orderNo: orderNo,
+    customerName: customerName,
     items: [...cart]
 });
 
@@ -536,7 +549,8 @@ background:#f5f5f5;
 border-radius:8px;
 ">
 
-<b>Order #${order.orderNo}</b><br><br>
+<b>Order #${order.orderNo} ${order.customerName}</b>
+``<br><br>
 `;
 
 let orderTotal = 0;
