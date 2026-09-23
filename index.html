@@ -870,6 +870,23 @@ JSON.stringify(savedOrders)
 renderOrderHistory();
 
 }
+function resetAllData(){
+
+if(!confirm("Padam semua order dan reset semula?")){
+return;
+}
+
+localStorage.removeItem("savedOrders");
+localStorage.removeItem("orderNo");
+
+savedOrders = [];
+orderNo = 1;
+
+renderOrderHistory();
+
+alert("Data berjaya direset");
+
+}    
 window.onload = function(){
 
 showSate();
@@ -940,7 +957,11 @@ renderOrderHistory();
         <button class="order-btn" onclick="shareWhatsApp()">
             📱 WhatsApp
         </button>
-
+<button class="order-btn"
+onclick="resetAllData()"
+style="background:red;">
+🗑️ Reset Data
+</button>
         <hr>
 
         <h3>Order History</h3>
