@@ -226,55 +226,61 @@ document.getElementById("productGrid").innerHTML = `
 
 }
 function showNasiLemak(){
-
 document.getElementById("configPanel").innerHTML = `
 
-<div class="config-card">
+<div class="product-grid">
 
-<h3>🍛 Nasi Lemak</h3>
-
-<label>
+<div class="product-card">
+<label style="cursor:pointer">
 <input type="checkbox" id="ayamMerah">
-Ayam Merah (+RM4.50)
+<h3>🍗 Ayam Merah</h3>
+<div class="price">RM4.50</div>
 </label>
+</div>
 
-<br><br>
-
-<label>
+<div class="product-card">
+<label style="cursor:pointer">
 <input type="checkbox" id="ayamRendang">
-Ayam Rendang (+RM4.50)
+<h3>🍗 Ayam Rendang</h3>
+<div class="price">RM4.50</div>
 </label>
+</div>
 
-<br><br>
-
-<label>
+<div class="product-card">
+<label style="cursor:pointer">
 <input type="checkbox" id="telurMata">
-Telur Mata (+RM1.00)
+<h3>🍳 Telur Mata</h3>
+<div class="price">RM1.00</div>
 </label>
+</div>
 
-<br><br>
-
-<label>
+<div class="product-card">
+<label style="cursor:pointer">
 <input type="checkbox" id="telurRebus">
-Telur Rebus (+RM1.50)
+<h3>🥚 Telur Rebus</h3>
+<div class="price">RM1.50</div>
 </label>
+</div>
 
-<br><br>
-
-<label>
+<div class="product-card">
+<label style="cursor:pointer">
 <input type="checkbox" id="telurRendang">
-Telur Rendang (+RM2.00)
+<h3>🥚 Telur Rendang</h3>
+<div class="price">RM2.00</div>
 </label>
-
-<br><br>
-
-<button onclick="addNasiLemak()">
-Tambah Nasi Lemak
-</button>
+</div>
 
 </div>
 
+<button
+class="order-btn"
+style="margin-top:15px;"
+onclick="addNasiLemak()">
+Tambah Nasi Lemak
+</button>
+
 `;
+
 
 document.getElementById("menuTitle").innerHTML =
 "🍛 Nasi Lemak";
