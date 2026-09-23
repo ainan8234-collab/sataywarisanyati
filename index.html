@@ -226,102 +226,54 @@ document.getElementById("productGrid").innerHTML = `
 
 }
 function showNasiLemak(){
-document.getElementById("configPanel").innerHTML = `
 
-<div class="product-grid">
+document.getElementById("configPanel").innerHTML = "";
 
-<div class="product-card">
-<label style="cursor:pointer">
-<input type="checkbox" id="ayamMerah">
-<h3>🍗 Ayam Merah</h3>
+document.getElementById("menuTitle").innerHTML =
+"🍛 Menu Nasi Lemak";
+
+document.getElementById("productGrid").innerHTML = `
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak Biasa',3.00)">
+<h3>🍛 Nasi Lemak Biasa</h3>
+<div class="price">RM3.00</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Ayam Merah',7.50)">
+<h3>🍗 Nasi Lemak + Ayam Merah</h3>
+<div class="price">RM7.50</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Ayam Rendang',7.50)">
+<h3>🍗 Nasi Lemak + Ayam Rendang</h3>
+<div class="price">RM7.50</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Mata',4.00)">
+<h3>🍳 Nasi Lemak + Telur Mata</h3>
+<div class="price">RM4.00</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Rebus',4.50)">
+<h3>🥚 Nasi Lemak + Telur Rebus</h3>
 <div class="price">RM4.50</div>
-</label>
 </div>
 
-<div class="product-card">
-<label style="cursor:pointer">
-<input type="checkbox" id="ayamRendang">
-<h3>🍗 Ayam Rendang</h3>
-<div class="price">RM4.50</div>
-</label>
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Telur Rendang',5.00)">
+<h3>🥚 Nasi Lemak + Telur Rendang</h3>
+<div class="price">RM5.00</div>
 </div>
-
-<div class="product-card">
-<label style="cursor:pointer">
-<input type="checkbox" id="telurMata">
-<h3>🍳 Telur Mata</h3>
-<div class="price">RM1.00</div>
-</label>
-</div>
-
-<div class="product-card">
-<label style="cursor:pointer">
-<input type="checkbox" id="telurRebus">
-<h3>🥚 Telur Rebus</h3>
-<div class="price">RM1.50</div>
-</label>
-</div>
-
-<div class="product-card">
-<label style="cursor:pointer">
-<input type="checkbox" id="telurRendang">
-<h3>🥚 Telur Rendang</h3>
-<div class="price">RM2.00</div>
-</label>
-</div>
-
-</div>
-
-<button
-class="order-btn"
-style="margin-top:15px;"
-onclick="addNasiLemak()">
-Tambah Nasi Lemak
-</button>
 
 `;
 
-
-document.getElementById("menuTitle").innerHTML =
-"🍛 Nasi Lemak";
-
-document.getElementById("productGrid").innerHTML = "";
-
 }
 
-    function addNasiLemak(){
-
-let nama = "Nasi Lemak";
-let harga = 3.00;
-
-if(document.getElementById("ayamMerah").checked){
-nama += " + Ayam Merah";
-harga += 4.50;
-}
-
-if(document.getElementById("ayamRendang").checked){
-nama += " + Ayam Rendang";
-harga += 4.50;
-}
-
-if(document.getElementById("telurMata").checked){
-nama += " + Telur Mata";
-harga += 1.00;
-}
-
-if(document.getElementById("telurRebus").checked){
-nama += " + Telur Rebus";
-harga += 1.50;
-}
-
-if(document.getElementById("telurRendang").checked){
-nama += " + Telur Rendang";
-harga += 2.00;
-}
-
-qtyPopup(nama,harga);
-
-}
     function showAddonLauk(){
 
 document.getElementById("configPanel").innerHTML = "";
