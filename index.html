@@ -221,7 +221,7 @@ document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card" onclick="showNasiLemakCard()">
 <h3>Nasi Lemak</h3>
-<div class="price">RM4.00</div>
+<div class="price">RM3.00</div>
 </div>
 
 `;
@@ -373,7 +373,7 @@ Telur Rendang (+RM2.00)
 <br><br>
 
 <button onclick="addNasiLemak()">
-Tambah Ke Cart
+Tambah Nasi Lemak
 </button>
 
 </div>
@@ -401,7 +401,7 @@ nama += " + Ayam Rendang";
 total += 4.5;
 }
 
-if(document.getElementById("telurRebusSebiji").checked){
+if(document.getElementById("telurRebus").checked){
 nama += " + Telur Rebus";
 total += 1.0;
 }
@@ -549,8 +549,7 @@ background:#f5f5f5;
 border-radius:8px;
 ">
 
-<b>Order #${order.orderNo} ${order.customerName}</b>
-``<br><br>
+<b>Order #${order.orderNo} ${order.customerName}</b><br><br>
 `;
 
 let orderTotal = 0;
