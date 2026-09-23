@@ -436,11 +436,23 @@ if(qty===null || qty==="" || qty<=0){
 return;
 }
 
+let existingItem = cart.find(
+x => x.name === item && x.price === price
+);
+
+if(existingItem){
+
+existingItem.qty += Number(qty);
+
+}else{
+
 cart.push({
 name:item,
 qty:Number(qty),
 price:price
 });
+
+}
 
 renderCart();
 
@@ -462,11 +474,26 @@ let note = prompt(
 ""
 );
 
+let itemName =
+item + (note ? " (" + note + ")" : "");
+
+let existingItem = cart.find(
+x => x.name === itemName && x.price === price
+);
+
+if(existingItem){
+
+existingItem.qty += Number(qty);
+
+}else{
+
 cart.push({
-name:item + (note ? " (" + note + ")" : ""),
+name:itemName,
 qty:Number(qty),
 price:price
 });
+
+};
 
 renderCart();
 
@@ -635,7 +662,22 @@ background:#f5f5f5;
 border-radius:8px;
 ">
 
-<b>Order #${order.orderNo} ${order.customerName}</b><br><br>
+<b>Order #${order.orderNo} ${order.customerName}</b>
+
+<button onclick="deleteSavedOrder(${order.orderNo})"
+style="
+float:right;
+background:red;
+color:white;
+border:none;
+border-radius:5px;
+padding:3px 8px;
+cursor:pointer;
+">
+🗑️
+</button>
+
+<br><br>
 `;
 
 let orderTotal = 0;
@@ -735,7 +777,26 @@ encodeURIComponent(text),
 );
 
 }
+function deleteSavedOrder(orderNo){
 
+if(!confirm(
+"Padam Order #" + orderNo + " ?"
+)){
+return;
+}
+
+savedOrders = savedOrders.filter(
+order => order.orderNo !== orderNo
+);
+
+localStorage.setItem(
+"savedOrders",
+JSON.stringify(savedOrders)
+);
+
+renderOrderHistory();
+
+}
     window.onload = function(){
 
 showSate();
