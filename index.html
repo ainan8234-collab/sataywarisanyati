@@ -289,7 +289,7 @@ document.getElementById("productGrid").innerHTML = `
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Air Suam',0.20)">
+<div class="product-card"onclick="qtyPopup('Air Suam',0.20)">
 <h3>Air Suam</h3>
 <div class="price">RM0.20</div>
 </div>
@@ -314,13 +314,13 @@ document.getElementById("productGrid").innerHTML = `
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('${item} Panas',${hotPrice})">
+onclick="qtyPopupAir('${item} Panas',${hotPrice})">
 <h3>☕ Panas</h3>
 <div class="price">RM${hotPrice.toFixed(2)}</div>
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('${item} Sejuk',${coldPrice})">
+onclick="qtyPopupAir('${item} Sejuk',${coldPrice})">
 <h3>🧊 Sejuk</h3>
 <div class="price">RM${coldPrice.toFixed(2)}</div>
 </div>
@@ -434,11 +434,32 @@ if(qty===null || qty==="" || qty<=0){
 return;
 }
 
+cart.push({
+name:item,
+qty:Number(qty),
+price:price
+});
+
+renderCart();
+
+}
+
+function qtyPopupAir(item,price){
+
+let qty = prompt(
+"Masukkan kuantiti untuk " + item,
+"1"
+);
+
+if(qty===null || qty==="" || qty<=0){
+return;
+}
+
 let note = prompt(
-"Catatan? (Kurang manis, kurang ais, dll)",
+"Catatan? (Kurang Manis / Kurang Ais / Tiada Ais)",
 ""
 );
- 
+
 cart.push({
 name:item + (note ? " (" + note + ")" : ""),
 qty:Number(qty),
