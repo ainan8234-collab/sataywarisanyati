@@ -161,7 +161,7 @@ body{
 }
 </style>
 </head>
-<script>
+<body>
 
 let cart = [];
 let savedOrders = 
@@ -774,31 +774,31 @@ link.click();
 document.body.removeChild(link);
 
 }
-function shareWhatsApp(){
 
+   function shareWhatsApp(){
+ 
 let text =
 "🍢 SATAY WARISAN YATI\n\n";
-
+ 
 savedOrders.forEach(order => {
-
+ 
 let total = 0;
-
+ 
 order.items.forEach(item => {
 total += item.qty * item.price;
 });
-
+ 
 text +=
 `Order #${order.orderNo} ${order.customerName}\nRM${total.toFixed(2)}\n\n`;
-
+ 
 });
-
-window.open(
+ window.open(
 "https://wa.me/?text=" +
 encodeURIComponent(text),
 "_blank"
 );
-
-}
+   }
+    
 function deleteSavedOrder(orderNo){
 
 if(!confirm(
@@ -819,65 +819,93 @@ JSON.stringify(savedOrders)
 renderOrderHistory();
 
 }
-    window.onload = function(){
+window.onload = function(){
+
+setTimeout(() => {
 
 showSate();
 
 renderOrderHistory();
 
+},100);
+
 }
 
 
-    
 </script>
 
 <body>
 
 <div class="container">
 
+    <!-- LEFT -->
     <div class="sidebar">
+
+        <div class="logo">
+            <h2>🍢 Satay Warisan Yati</h2>
+        </div>
+
+        <button class="category-btn" onclick="showSate()">
+            🍢 Sate
+        </button>
+
+        <button class="category-btn" onclick="showSampingan()">
+            🍛 Sampingan
+        </button>
+
+        <button class="category-btn" onclick="showAir()">
+            🥤 Air
+        </button>
+
     </div>
 
+    <!-- CENTER -->
     <div class="products">
+
+        <h2 id="menuTitle">Menu Utama</h2>
+
+        <div class="product-grid" id="productGrid"></div>
+
+        <div id="configPanel"></div>
+
     </div>
 
+    <!-- RIGHT -->
     <div class="cart">
+
+        <h2>Order Menu</h2>
+
+        <div id="cartItems">
+            Tiada pesanan lagi
+        </div>
+
+        <hr>
+
+        <div class="total" id="cartTotal">
+            RM0.00
+        </div>
+
+        <button class="order-btn" onclick="saveOrder()">
+            Save Order
+        </button>
+
+        <button class="order-btn" onclick="exportCSV()">
+            📊 Export Excel
+        </button>
+
+        <button class="order-btn" onclick="shareWhatsApp()">
+            📱 WhatsApp
+        </button>
+
+        <hr>
+
+        <h3>Order History</h3>
+
+        <div id="orderHistory">
+            Tiada order lagi
+        </div>
+
     </div>
-
-</div>
-
-    <h2>Order Menu</h2>
-
-    <div id="cartItems">
-        Tiada pesanan lagi
-    </div>
-
-    <hr>
-
-<div class="total" id="cartTotal">
-    RM0.00
-</div>
-
-<button class="order-btn" onclick="saveOrder()">
-    Save Order
-</button>
-    
-<button class="order-btn" onclick="exportCSV()">
-    📊 Export Excel
-</button>
-
-<button class="order-btn" onclick="shareWhatsApp()">
-    📱 WhatsApp
-</button>
-<hr>
-
-<h3>Order History</h3>
-
-<div id="orderHistory">
-Tiada order lagi
-</div>
-
-</div>
 
 </div>
 
