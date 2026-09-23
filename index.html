@@ -163,6 +163,7 @@ body{
 </head>
 <body>
 
+<script>
 let cart = [];
 let savedOrders = 
 JSON.parse(localStorage.getItem("savedOrders")) || [];
@@ -821,20 +822,13 @@ renderOrderHistory();
 }
 window.onload = function(){
 
-setTimeout(() => {
-
 showSate();
 
 renderOrderHistory();
 
-},100);
-
 }
 
-
 </script>
-
-<body>
 
 <div class="container">
 
