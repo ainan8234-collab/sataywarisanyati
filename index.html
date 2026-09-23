@@ -291,12 +291,12 @@ document.getElementById("productGrid").innerHTML = `
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card"onclick="qtyPopup('Air Suam',0.20)">
+<div class="product-card" onclick="qtyPopupAirSimple('Air Suam',0.20)">
 <h3>Air Suam</h3>
 <div class="price">RM0.20</div>
 </div>
 
-<div class="product-card" onclick="qtyPopup('Air Kosong',0.80)">
+<div class="product-card" onclick="qtyPopupAirSimple('Air Kosong',0.80)">
 <h3>Air Kosong</h3>
 <div class="price">RM0.80</div>
 </div>
@@ -489,7 +489,38 @@ price:price
 renderCart();
 
 }
+function qtyPopupAirSimple(item,price){
 
+let qty = prompt(
+"Masukkan kuantiti untuk " + item,
+"1"
+);
+
+if(qty===null || qty==="" || qty<=0){
+return;
+}
+
+let existingItem = cart.find(
+x => x.name === item && x.price === price
+);
+
+if(existingItem){
+
+existingItem.qty += Number(qty);
+
+}else{
+
+cart.push({
+name:item,
+qty:Number(qty),
+price:price
+});
+
+}
+
+renderCart();
+
+}
 function renderCart(){
 
 let html = "";
