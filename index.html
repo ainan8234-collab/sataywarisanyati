@@ -135,20 +135,30 @@ body{
 @media(max-width:900px){
 
 .container{
-    grid-template-columns:1fr;
+    display:block;
 }
 
 .sidebar{
     display:flex;
-    overflow:auto;
     gap:10px;
+    overflow-x:auto;
+}
+
+.products{
+    padding:10px;
+}
+
+.product-grid{
+    grid-template-columns:repeat(2,1fr);
 }
 
 .cart{
     border-left:none;
+    margin-top:20px;
 }
 
 }
+
 #configPanel{
     margin-top:20px;
 }
