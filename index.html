@@ -805,22 +805,25 @@ document.getElementById("orderHistory").innerHTML =
 html;
 
 }
-   function exportCSV(){
+  function exportCSV(){
 
 let csv =
-"Tarikh,Order,Nama Pelanggan,Menu,Qty,Harga,Jumlah\n";
+"Tarikh,Order,Nama Pelanggan,Order Item,Total\n";
 
 savedOrders.forEach(order => {
 
-order.items.forEach(item => {
+let total = 0;
 
-let jumlah =
-item.qty * item.price;
+let itemList = order.items.map(item => {
+
+total += item.qty * item.price;
+
+return `${item.name} x${item.qty}`;
+
+}).join(" | ");
 
 csv +=
-`${order.date},${order.orderNo},${order.customerName},"${item.name}",${item.qty},${item.price.toFixed(2)},${jumlah.toFixed(2)}\n`;
-
-});
+`${order.date},${order.orderNo},${order.customerName},"${itemList}",${total.toFixed(2)}\n`;
 
 });
 
