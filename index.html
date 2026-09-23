@@ -805,21 +805,22 @@ document.getElementById("orderHistory").innerHTML =
 html;
 
 }
-    function exportCSV(){
+   function exportCSV(){
 
 let csv =
-"Tarikh,Order,Nama Pelanggan,Total\n";
+"Tarikh,Order,Nama Pelanggan,Menu,Qty,Harga,Jumlah\n";
 
 savedOrders.forEach(order => {
 
-let total = 0;
-
 order.items.forEach(item => {
-total += item.qty * item.price;
-});
+
+let jumlah =
+item.qty * item.price;
 
 csv +=
-`${order.date},${order.orderNo},${order.customerName},${total.toFixed(2)}\n`;
+`${order.date},${order.orderNo},${order.customerName},"${item.name}",${item.qty},${item.price.toFixed(2)},${jumlah.toFixed(2)}\n`;
+
+});
 
 });
 
@@ -843,7 +844,6 @@ link.click();
 document.body.removeChild(link);
 
 }
-
    function shareWhatsApp(){
  
 let text =
