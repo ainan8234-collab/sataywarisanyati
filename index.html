@@ -164,8 +164,11 @@ body{
 <script>
 
 let cart = [];
-let savedOrders = [];
-let orderNo = 1;
+let savedOrders = 
+JSON.parse(localStorage.getItem("savedOrders")) || [];
+let orderNo = 
+    Number(localStorage.getItem("orderNo")) || 1; 
+    `
 function showSate(){
 
 document.getElementById("menuTitle").innerHTML =
@@ -538,17 +541,29 @@ let customerName = prompt(
 if(customerName === null){
     return;
 }
+let today = new Date().toLocaleDateString('ms-MY');
+
 savedOrders.push({
+    date: today,
     orderNo: orderNo,
     customerName: customerName,
     items: [...cart]
 });
 
+localStorage.setItem(
+    "savedOrders",
+    JSON.stringify(savedOrders)
+);
+
 renderOrderHistory();
 
 alert("Order #" + orderNo + " berjaya disimpan");
 
-orderNo++;
+orderNo++;  
+localStorage.setItem(     
+"orderNo",     
+orderNo 
+);
 
 cart = [];
 
@@ -559,8 +574,23 @@ renderCart();
 function renderOrderHistory(){
 
 let html = "";
+let currentDate = "";
+`
 
-savedOrders.forEach(order => {
+savedOrders.forEach(order => {  
+if(currentDate !== order.date){  
+currentDate = order.date;  
+html += ` 
+    <h3 style=" 
+    margin-top:15px; 
+    background:#eee; 
+    padding:8px;
+    border-radius:6px; 
+    "> 
+        📅 ${order.date} 
+    </h3> 
+        `;  
+        }
 
 html += `
 <div style="
@@ -607,8 +637,12 @@ document.getElementById("orderHistory").innerHTML =
 html;
 
 }
-    window.onload = function(){
-    showSate();
+window.onload = function(){
+
+showSate();
+
+renderOrderHistory();
+
 }
 </script>
 
