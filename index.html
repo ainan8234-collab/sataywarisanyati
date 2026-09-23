@@ -168,7 +168,6 @@ let savedOrders =
 JSON.parse(localStorage.getItem("savedOrders")) || [];
 let orderNo = 
     Number(localStorage.getItem("orderNo")) || 1; 
-    `
 function showSate(){
 
 document.getElementById("menuTitle").innerHTML =
@@ -575,7 +574,6 @@ function renderOrderHistory(){
 
 let html = "";
 let currentDate = "";
-`
 
 savedOrders.forEach(order => {  
 if(currentDate !== order.date){  
