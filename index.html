@@ -427,28 +427,19 @@ document.getElementById("configPanel").innerHTML = "";
 
 function qtyPopup(item,price){
 
-let qty = prompt(
-"Masukkan kuantiti untuk " + item,
-"1"
-);
-
-if(qty===null || qty==="" || qty<=0){
-return;
-}
-
 let existingItem = cart.find(
 x => x.name === item && x.price === price
 );
 
 if(existingItem){
 
-existingItem.qty += Number(qty);
+existingItem.qty += 1;
 
 }else{
 
 cart.push({
 name:item,
-qty:Number(qty),
+qty:1,
 price:price
 });
 
