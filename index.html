@@ -180,7 +180,7 @@ JSON.parse(localStorage.getItem("savedOrders")) || [];
 let orderNo = 
     Number(localStorage.getItem("orderNo")) || 1; 
 function showSate(){
-
+document.getElementById("configPanel").innerHTML = "";
 document.getElementById("menuTitle").innerHTML =
 "🍢 Menu Sate";
 
@@ -226,7 +226,7 @@ document.getElementById("productGrid").innerHTML = `
 
 }
 function showSampingan(){
-
+document.getElementById("configPanel").innerHTML = "";
 document.getElementById("menuTitle").innerHTML =
 "🍛 Menu Sampingan";
 
@@ -241,7 +241,7 @@ document.getElementById("productGrid").innerHTML = `
 
 }
     function showAir(){
-
+document.getElementById("configPanel").innerHTML = "";
 document.getElementById("menuTitle").innerHTML =
 "🥤 Menu Air";
 
@@ -282,8 +282,13 @@ document.getElementById("productGrid").innerHTML = `
 <div class="price">Panas / Sejuk</div>
 </div>
 
-<div class="product-card" onclick="showAirOption('Jagung',1.50,2.00)">
+<div class="product-card" onclick="showAirOption('Jagung',2.00,2.50)">
 <h3>Jagung</h3>
+<div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card" onclick="showAirOption('Jagung Ori',1.50,2.00)">
+<h3>Jagung Ori</h3>
 <div class="price">Panas / Sejuk</div>
 </div>
 
