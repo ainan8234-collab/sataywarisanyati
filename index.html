@@ -302,8 +302,8 @@ document.getElementById("menuTitle").innerHTML =
 document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card"
-onclick="qtyPopup('Nasi Putih',3.00)">
-<h3>🍚 Nasi Putih</h3>
+onclick="qtyPopup('Nasi Lemak',3.00)">
+<h3>🍚 Nasi Lemak</h3>
 <div class="price">RM3.00</div>
 </div>
 
@@ -367,62 +367,62 @@ document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card" onclick="showAirOption('Teh O',1.50,2.00)">
 <h3>Teh O</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Teh',2.50,3.00)">
 <h3>Teh</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Milo',3.50,4.50)">
 <h3>Milo</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Nescafe',3.00,4.50)">
 <h3>Nescafe</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Neslo',4.50,5.50)">
 <h3>Neslo</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Sirap',1.50,2.00)">
 <h3>Sirap</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Tebu',1.50,2.00)">
 <h3>Tebu</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Jagung',2.00,2.50)">
 <h3>Jagung</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Jagung Ori',1.50,2.00)">
 <h3>Jagung Ori</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Extrajoss Anggur',3.50,4.00)">
 <h3>Extrajoss Anggur</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Extrajoss Mangga',3.50,4.00)">
 <h3>Extrajoss Mangga</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card" onclick="showAirOption('Extrajoss Oren',3.50,4.00)">
 <h3>Extrajoss Oren</h3>
-<div class="price">Panas / Sejuk</div>
+<div class="price">Panas / Ais</div>
 </div>
 
 <div class="product-card"
@@ -462,8 +462,8 @@ onclick="qtyPopupAir('${item} Panas',${hotPrice})">
 </div>
 
 <div class="product-card"
-onclick="qtyPopupAir('${item} Sejuk',${coldPrice})">
-<h3>🧊 Sejuk</h3>
+onclick="qtyPopupAir('${item} Ais',${coldPrice})">
+<h3>🧊 Ais</h3>
 <div class="price">RM${coldPrice.toFixed(2)}</div>
 </div>
 
@@ -765,7 +765,30 @@ background:#f5f5f5;
 border-radius:8px;
 ">
 
-<b>Order #${order.orderNo} ${order.customerName}</b>
+<b>Order #${order.orderNo} ${order.customerName}</b>  
+
+<button onclick="editSavedOrder(${order.orderNo})" 
+style=" 
+float:right; 
+background:orange; 
+color:white; 
+border:none; 
+border-radius:5px; 
+padding:3px 8px; 
+cursor:pointer; 
+margin-right:5px; 
+"> ✏️ </button>  
+<button onclick=
+"deleteSavedOrder(${order.orderNo})" 
+style=" 
+float:right; 
+background:red; 
+color:white; border:none; 
+border-radius:5px; 
+padding:3px 8px; 
+cursor:pointer; 
+"> 🗑️ 
+</button>
 
 <button onclick="deleteSavedOrder(${order.orderNo})"
 style="
@@ -779,6 +802,37 @@ cursor:pointer;
 ">
 🗑️
 </button>
+
+function editSavedOrder(orderNo){
+
+let order = savedOrders.find(
+x => x.orderNo === orderNo
+);
+
+if(!order){
+return;
+}
+
+cart = JSON.parse(JSON.stringify(order.items));
+
+savedOrders = savedOrders.filter(
+x => x.orderNo !== orderNo
+);
+
+localStorage.setItem(
+"savedOrders",
+JSON.stringify(savedOrders)
+);
+
+renderOrderHistory();
+renderCart();
+
+alert(
+"Order #" + orderNo +
+" dimasukkan semula ke Cart. Sila edit dan Save semula."
+);
+
+}
 
 <br><br>
 `;
