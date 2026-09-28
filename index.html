@@ -302,15 +302,21 @@ document.getElementById("menuTitle").innerHTML =
 document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card"
+onclick="qtyPopup('Nasi Putih',3.00)">
+<h3>🍚 Nasi Putih</h3>
+<div class="price">RM3.00</div>
+</div>
+
+<div class="product-card"
 onclick="qtyPopup('Ayam Merah Sahaja',4.50)">
 <h3>🍗 Ayam Merah</h3>
 <div class="price">RM4.50</div>
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('Ayam Rendang Sahaja',4.50)">
+onclick="qtyPopup('Ayam Rendang Sahaja',5.00)">
 <h3>🍗 Ayam Rendang</h3>
-<div class="price">RM4.50</div>
+<div class="price">RM5.00</div>
 </div>
 
 <div class="product-card"
@@ -417,6 +423,12 @@ document.getElementById("productGrid").innerHTML = `
 <div class="product-card" onclick="showAirOption('Extrajoss Oren',3.50,4.00)">
 <h3>Extrajoss Oren</h3>
 <div class="price">Panas / Sejuk</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopupAirSimple('Air Gas',2.50)">
+<h3>🥤 Air Gas</h3>
+<div class="price">RM2.50</div>
 </div>
 
 <div class="product-card" onclick="qtyPopupAirSimple('Air Suam',0.20)">
