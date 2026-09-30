@@ -778,17 +778,6 @@ padding:3px 8px;
 cursor:pointer; 
 margin-right:5px; 
 "> ✏️ </button>  
-<button onclick=
-"deleteSavedOrder(${order.orderNo})" 
-style=" 
-float:right; 
-background:red; 
-color:white; border:none; 
-border-radius:5px; 
-padding:3px 8px; 
-cursor:pointer; 
-"> 🗑️ 
-</button>
 
 <button onclick="deleteSavedOrder(${order.orderNo})"
 style="
@@ -802,37 +791,6 @@ cursor:pointer;
 ">
 🗑️
 </button>
-
-function editSavedOrder(orderNo){
-
-let order = savedOrders.find(
-x => x.orderNo === orderNo
-);
-
-if(!order){
-return;
-}
-
-cart = JSON.parse(JSON.stringify(order.items));
-
-savedOrders = savedOrders.filter(
-x => x.orderNo !== orderNo
-);
-
-localStorage.setItem(
-"savedOrders",
-JSON.stringify(savedOrders)
-);
-
-renderOrderHistory();
-renderCart();
-
-alert(
-"Order #" + orderNo +
-" dimasukkan semula ke Cart. Sila edit dan Save semula."
-);
-
-}
 
 <br><br>
 `;
@@ -863,7 +821,7 @@ html += `
 
 });
 
-if(html===""){
+    if(html===""){
 html = "Tiada order lagi";
 }
 
@@ -871,7 +829,38 @@ document.getElementById("orderHistory").innerHTML =
 html;
 
 }
-  function exportCSV(){
+
+  function editSavedOrder(orderNo){
+
+let order = savedOrders.find(
+x => x.orderNo === orderNo
+);
+
+if(!order){
+return;
+}
+
+cart = JSON.parse(JSON.stringify(order.items));
+
+savedOrders = savedOrders.filter(
+x => x.orderNo !== orderNo
+);
+
+localStorage.setItem(
+"savedOrders",
+JSON.stringify(savedOrders)
+);
+
+renderOrderHistory();
+renderCart();
+
+alert(
+"Order #" + orderNo +
+" dimasukkan semula ke Cart. Sila edit dan Save semula."
+);
+
+}
+    function exportCSV(){
 
 let csv =
 "Tarikh,Order,Nama Pelanggan,Order Item,Total\n";
