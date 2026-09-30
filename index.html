@@ -9,7 +9,7 @@
 
 *{
     margin:0;
-    padding:0;
+    padding:0;F
     box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
@@ -265,6 +265,18 @@ onclick="qtyPopup('Nasi Lemak + Ayam Goreng',7.00)">
 </div>
 
 <div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Paru Berlada',7.50)">
+<h3> Nasi Lemak + Paru Berlada</h3>
+<div class="price">RM7.50</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Nasi Lemak + Sardin',7.50)">
+<h3> Nasi Lemak + Sardin</h3>
+<div class="price">RM7.50</div>
+</div>
+
+<div class="product-card"
 onclick="qtyPopup('Nasi Lemak + Telur Mata',4.00)">
 <h3>🍳 Nasi Lemak + Telur Mata</h3>
 <div class="price">RM4.00</div>
@@ -277,15 +289,15 @@ onclick="qtyPopup('Nasi Lemak + Telur Rebus',4.00)">
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('Nasi Lemak + Telur Rendang',5.00)">
-<h3>🥚 Nasi Lemak + Telur Rendang</h3>
+onclick="qtyPopup('Nasi Lemak + Telur Rebus Rendang',5.00)">
+<h3>🥚 Nasi Lemak + Telur Rebus Rendang</h3>
 <div class="price">RM5.00</div>
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('Nasi Lemak + Telur Sambal',5.00)">
-<h3>🥚 Nasi Lemak + Telur Sambal</h3>
-<div class="price">RM5.00</div>
+onclick="qtyPopup('Nasi Lemak + Telur Rebus Sambal',4.50)">
+<h3>🥚 Nasi Lemak + Telur Rebus Sambal</h3>
+<div class="price">RM4.50</div>
 </div>
 
 `;
@@ -332,6 +344,18 @@ onclick="qtyPopup('Ayam Goreng Sahaja',4.00)">
 </div>
 
 <div class="product-card"
+onclick="qtyPopup('Paru Berlada Sahaja',4.50)">
+<h3> Paru Berlada</h3>
+<div class="price">RM4.50</div>
+</div>
+
+<div class="product-card"
+onclick="qtyPopup('Sardin Sahaja',4.50)">
+<h3> Sardin</h3>
+<div class="price">RM4.50</div>
+</div>
+
+<div class="product-card"
 onclick="qtyPopup('Telur Mata Sahaja',1.00)">
 <h3>🍳 Telur Mata</h3>
 <div class="price">RM1.00</div>
@@ -350,9 +374,9 @@ onclick="qtyPopup('Telur Rendang Sahaja',2.00)">
 </div>
 
 <div class="product-card"
-onclick="qtyPopup('Telur Sambal Sahaja',2.00)">
+onclick="qtyPopup('Telur Sambal Sahaja',1.50)">
 <h3>🥚 Telur Sambal</h3>
-<div class="price">RM2.00</div>
+<div class="price">RM1.50</div>
 </div>
 
 `;
@@ -367,6 +391,11 @@ document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card" onclick="showAirOption('Teh O',1.50,2.00)">
 <h3>Teh O</h3>
+<div class="price">Panas / Ais</div>
+</div>
+
+<div class="product-card" onclick="showAirOption('Teh O Limau',2.50,3.00)">
+<h3>Teh O Limau</h3>
 <div class="price">Panas / Ais</div>
 </div>
 
@@ -407,6 +436,11 @@ document.getElementById("productGrid").innerHTML = `
 
 <div class="product-card" onclick="showAirOption('Sirap',1.50,2.00)">
 <h3>Sirap</h3>
+<div class="price">Panas / Ais</div>
+</div>
+
+<div class="product-card" onclick="showAirOption('Limau',2.00,2.50)">
+<h3>Limau</h3>
 <div class="price">Panas / Ais</div>
 </div>
 
