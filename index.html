@@ -793,12 +793,14 @@ alert(
 
 if(editingOrderNo === null){
 
+    orderNo++;
+
 }else{
 
-editingOrderNo = null;
-editingCustomerName = "";
+    editingOrderNo = null;
+    editingCustomerName = "";
 
-}  
+} 
     
 localStorage.setItem(     
 "orderNo",     
@@ -817,7 +819,7 @@ let html = "";
 let currentDate = "";
 let totalSales = 0;
 
-savedOrders.forEach(order => {  
+savedOrders.forEach((order,index) => {
 if(currentDate !== order.date){  
 currentDate = order.date;  
 html += ` 
@@ -842,7 +844,7 @@ border-radius:8px;
 
 <b>Order #${order.orderNo} ${order.customerName}</b>  
 
-<button onclick="editSavedOrder(${order.orderNo})" 
+<button onclick="editSavedOrder(${index})" 
 style=" 
 float:right; 
 background:orange; 
@@ -854,7 +856,7 @@ cursor:pointer;
 margin-right:5px; 
 "> ✏️ </button>  
 
-<button onclick="deleteSavedOrder(${order.orderNo})"
+<button onclick="deleteSavedOrder(${index})"
 style="
 float:right;
 background:red;
@@ -916,11 +918,9 @@ html;
 
 }
 
-function editSavedOrder(orderNo){
+function editSavedOrder(index){
 
-let order = savedOrders.find(
-x => x.orderNo === orderNo
-);
+let order = savedOrders[index];
 
 if(!order){
 return;
@@ -933,9 +933,7 @@ cart = JSON.parse(
 JSON.stringify(order.items)
 );
 
-savedOrders = savedOrders.filter(
-x => x.orderNo !== orderNo
-);
+savedOrders.splice(index,1);
 
 localStorage.setItem(
 "savedOrders",
@@ -946,7 +944,7 @@ renderOrderHistory();
 renderCart();
 
 alert(
-"Order #" + orderNo +
+"Order #" + editingOrderNo +
 " dimasukkan semula ke Cart."
 );
 
@@ -957,7 +955,7 @@ function exportCSV(){
 let csv =
 "Tarikh,Order,Nama Pelanggan,Order Item,Total\n";
     
-savedOrders.forEach(order => {
+savedOrders.forEach((order,index) => {
 
 let total = 0;
 
@@ -1018,17 +1016,17 @@ encodeURIComponent(text),
 );
    }
     
-function deleteSavedOrder(orderNo){
+function deleteSavedOrder(index){
 
 if(!confirm(
-"Padam Order #" + orderNo + " ?"
+"Padam Order #" +
+savedOrders[index].orderNo +
+" ?"
 )){
 return;
 }
 
-savedOrders = savedOrders.filter(
-order => order.orderNo !== orderNo
-);
+savedOrders.splice(index,1);
 
 localStorage.setItem(
 "savedOrders",
@@ -1038,6 +1036,8 @@ JSON.stringify(savedOrders)
 renderOrderHistory();
 
 }
+
+
 function resetAllData(){
 
 if(!confirm("Padam semua order dan reset semula?")){
