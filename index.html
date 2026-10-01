@@ -819,7 +819,7 @@ let html = "";
 let currentDate = "";
 let totalSales = 0;
 
-savedOrders.forEach((order,index) => {
+[...savedOrders].reverse().forEach((order,index) => {
 if(currentDate !== order.date){  
 currentDate = order.date;  
 html += ` 
@@ -899,19 +899,19 @@ html += `
 
 });
 
-    if(html===""){
+if(html===""){
 html = "Tiada order lagi";
 }
 
-html += `
-<hr>
+html = `
 <h3 style="
 color:green;
-margin-top:15px;
+margin-bottom:15px;
 ">
 💰 Total Sales: RM${totalSales.toFixed(2)}
 </h3>
-`;
+<hr>
+` + html;   
     
 document.getElementById("orderHistory").innerHTML =
 html;
@@ -955,7 +955,7 @@ function exportCSV(){
 let csv =
 "Tarikh,Order,Nama Pelanggan,Order Item,Total\n";
     
-savedOrders.forEach((order,index) => {
+[...savedOrders].reverse().forEach((order,index) => {
 
 let total = 0;
 
